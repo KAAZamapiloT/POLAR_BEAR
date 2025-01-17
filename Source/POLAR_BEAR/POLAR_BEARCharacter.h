@@ -43,7 +43,12 @@ class APOLAR_BEARCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
-
+    /**Sprint Input Acton */
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* SprintAction;
+    	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* WeakAttackAction;
 public:
 	APOLAR_BEARCharacter();
 	
@@ -56,7 +61,11 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 			
+   void Sprint();
 
+   void StopSprint();
+
+void weak_attack();
 protected:
 
 	virtual void NotifyControllerChanged() override;

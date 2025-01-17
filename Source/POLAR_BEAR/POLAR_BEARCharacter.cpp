@@ -85,6 +85,9 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Look);
+		//Sprinting
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Sprint);
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::StopSprint);
 	}
 	else
 	{
@@ -126,4 +129,22 @@ void APOLAR_BEARCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void APOLAR_BEARCharacter::Sprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 1200.0f;
+}
+
+void APOLAR_BEARCharacter::StopSprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+}
+
+
+
+void APOLAR_BEARCharacter::weak_attack()
+{
+
+	
 }
