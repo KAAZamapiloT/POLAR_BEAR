@@ -10,6 +10,21 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Engine/EngineTypes.h"        // Core tracing and collision types.
+#include "CollisionQueryParams.h"      // For customizing collision queries.
+#include "DrawDebugHelpers.h"          // For visualizing traces (debugging).
+#include "Engine/HitResult.h"          // For storing trace or hit data.
+#include "Math/Vector.h"               // For FVector (positions, directions).
+#include "Math/Quat.h"                 // For FQuat (rotations).
+#include "Math/Transform.h"            // For FTransform (locations, rotations, scales).
+#include "Math/UnrealMathUtility.h"    // For math utilities.
+#include "PhysicsEngine/ShapeElem.h"   // For general collision shapes.
+#include "CollisionShape.h"            // For FCollisionShape (e.g., sphere, box, capsule).
+#include "GameFramework/DamageType.h"  // For defining and applying damage.
+#include "Kismet/GameplayStatics.h"    // For gameplay utilities (applying damage, spawning effects, etc.).
+#include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
+#include "GameFramework/InputSettings.h" // For standard input handling.
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -20,7 +35,7 @@ APOLAR_BEARCharacter::APOLAR_BEARCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
+
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -142,9 +157,9 @@ void APOLAR_BEARCharacter::StopSprint()
 }
 
 
-
 void APOLAR_BEARCharacter::weak_attack()
 {
-
+	TArray<FHitResult> HitResults;
+	FVector Start=GetActorLocation();
 	
 }

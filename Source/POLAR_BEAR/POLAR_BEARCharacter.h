@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
 #include "POLAR_BEARCharacter.generated.h"
 
