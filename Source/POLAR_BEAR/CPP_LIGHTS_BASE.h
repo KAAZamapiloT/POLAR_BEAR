@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "IA_intractable.h"
 #include "CPP_LIGHTS_BASE.generated.h"
 
 UCLASS()
-class POLAR_BEAR_API ACPP_LIGHTS_BASE : public AActor
+class POLAR_BEAR_API ACPP_LIGHTS_BASE : public AActor,public IIA_intractable
 {
 	GENERATED_BODY()
-
+    
 public:
 	// Sets default values for this actor's properties
 	ACPP_LIGHTS_BASE();
@@ -18,7 +19,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+    
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

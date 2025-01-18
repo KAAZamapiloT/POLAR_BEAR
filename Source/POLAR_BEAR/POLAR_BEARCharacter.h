@@ -61,11 +61,11 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+/** Called for sprinting characters*/		
    void Sprint();
-
+/** Called for stopping Sprint*/
    void StopSprint();
-
+/** Weak attack -> Faster -> Deals_less_Damage*/ 
 void weak_attack();
 protected:
 
