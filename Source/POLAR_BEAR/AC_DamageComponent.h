@@ -40,22 +40,18 @@ enum class EDamageReaction : uint8
    Depression UMETA(DisplayName = "Depression")
 };
 
-USTRUCT(BlueprintType)
+USTRUCT(BlueprintType)           //THIS DAMAGE INFO IS CREATED FOR A PARTICULAR ATTACK
 struct FDamageInfo
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	double Damage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double HitsPerSecond;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageType Damage_Type;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EDamageReaction Damage_Reaction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanDodge;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bCanIntereput;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanNullify;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -83,34 +79,31 @@ struct FHealthInfo
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double Health;
+	double CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	double MaxHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double FlameResistance;
+	double Sanity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double MaxFlameResistance;
+	int HeartBeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double DamageResistance;
+	int MinHeartBeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double MaxDamageResistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double Temprature;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double FreezeResistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double ShockResistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double PanicResistance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	double DepressionResistance;
-	
+	int Stamina;
 };
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class POLAR_BEAR_API UAC_DamageComponent : public UActorComponent
 {
 	GENERATED_BODY()
-
+	struct FHealthInfo Health={
+    100,
+		200,
+		100,
+		70,
+		50,
+		100
+	};
+	
 public:
 	// Sets default values for this component's properties
 	UAC_DamageComponent();
@@ -118,7 +111,16 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-    virtual void TakeDamage() ;
+    virtual void TakeDamage(double Amount) ;
+	// CAN MAKE IT FIXED AMOUNT SO THAT GAME STAYS SIMPLER 
+	virtual void IncreseStamina	();
+	virtual void DecreseStamina	();
+	//REGENERATION PLAYER MIGHT REGENERATE AFTER TAKING DAMAGE FROM ENEMY
+	virtual void IncreaseHealth	();
+
+
+	//  HEARTBEAT FUNCTIONS -> HEARBEAT IS DEPENDEND ON EMENY LOCATION AND DISTANCE FROM PLAYER SO IT MIGHT BE COMPLEX
+	virtual void ChangeHeartBeat();
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,

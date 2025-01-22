@@ -24,7 +24,24 @@ void UAC_DamageComponent::BeginPlay()
 	
 }
 
-void UAC_DamageComponent::TakeDamage()
+void UAC_DamageComponent::TakeDamage(double Amount)
+{
+	
+}
+
+void UAC_DamageComponent::IncreseStamina()
+{
+}
+
+void UAC_DamageComponent::DecreseStamina()
+{
+}
+
+void UAC_DamageComponent::IncreaseHealth()
+{
+}
+
+void UAC_DamageComponent::ChangeHeartBeat()
 {
 }
 
