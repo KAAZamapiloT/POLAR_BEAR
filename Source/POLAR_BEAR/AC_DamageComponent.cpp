@@ -26,23 +26,72 @@ void UAC_DamageComponent::BeginPlay()
 
 void UAC_DamageComponent::TakeDamage(double Amount)
 {
+		Health.CurrentHealth-=Amount;
+}
+
+void UAC_DamageComponent::IncreseStamina(double Amount)
+{
+   if (Health.Stamina+Amount<=Health.MaxStamina)
+   {
+	   Health.Stamina+=Amount;
+   }else
+   {
+	   Health.Stamina=Health.MaxStamina;
+   }
+}
+
+void UAC_DamageComponent::DecreseStamina(double Amount)
+{
+		Health.Stamina-=Amount;
+
+}
+
+void UAC_DamageComponent::IncreaseHealth(double Amount)
+{
+	if (Health.CurrentHealth+Amount<=Health.MaxHealth)
+	{
+		Health.CurrentHealth+=Health.MaxHealth;
+	}else
+	{
+		Health.CurrentHealth=Health.MaxHealth;
+	}
+	
 	
 }
 
-void UAC_DamageComponent::IncreseStamina()
+void UAC_DamageComponent::IncreseHeartbeat(double Amount)
 {
+	Health.HeartBeat+=Amount;
 }
 
-void UAC_DamageComponent::DecreseStamina()
+void UAC_DamageComponent::DecreseHeartbeat(double Amount)
 {
+	if (Health.HeartBeat-Amount>=Health.MinHeartBeat)
+	{
+		Health.HeartBeat-=Amount;
+	}else
+	{
+		Health.HeartBeat=Health.MinHeartBeat;
+	}
 }
 
-void UAC_DamageComponent::IncreaseHealth()
+
+bool UAC_DamageComponent::FbIsDead()
 {
+	if (Health.CurrentHealth<=0)
+	{
+		return true;
+	}
+	return false;
 }
 
-void UAC_DamageComponent::ChangeHeartBeat()
+bool UAC_DamageComponent::FbIsHavingHeartAttack(double Threashold)
 {
+	if (Health.HeartBeat>Threashold)
+	{
+		return true;
+	}
+	return false;
 }
 
 

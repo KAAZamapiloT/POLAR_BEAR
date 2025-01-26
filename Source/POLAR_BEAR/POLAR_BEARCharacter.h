@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
+#include "AC_DamageComponent.h"
 #include "POLAR_BEARCharacter.generated.h"
 
 class USpringArmComponent;
@@ -15,6 +16,9 @@ class UInputAction;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
+
+
+
 
 UCLASS(config=Game)
 class APOLAR_BEARCharacter : public ACharacter

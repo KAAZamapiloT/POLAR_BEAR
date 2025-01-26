@@ -8,6 +8,16 @@
 
 // IMPORTANT VARIABLES FOR DAMAGE SYSTEM
 UENUM(BlueprintType)
+enum class EEffect: uint8
+{
+	NoDamage,   // DAMAGE IN NULLIFIED
+	UnlimitedStamina, // NO STAMINA REDUCTION 
+	SpedUp,           // 
+	MentallyTough    // NO SANITY DROP 
+	
+};
+
+UENUM(BlueprintType)
 enum class EDamageType : uint8
 {
 	None UMETA(DisplayName = "None"),
@@ -41,38 +51,26 @@ enum class EDamageReaction : uint8
 };
 
 USTRUCT(BlueprintType)           //THIS DAMAGE INFO IS CREATED FOR A PARTICULAR ATTACK
+                                 //ENEMY CANT BE DAMAGED	
 struct FDamageInfo
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	double Damage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EDamageType Damage_Type;
+	EDamageType DamageType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	EDamageReaction Damage_Reaction;
+	EDamageReaction DamageReaction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bCanDodge;
+	double SanityReduction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bCanNullify;
+	double StaggerReduction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool StaggerDamage;
+	bool bCanBeDodged;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool StunDamage;
-	UPROPERTY(editAnywhere, BlueprintReadWrite)
-	bool FallBackDamage;
+	bool bCanBeStopped;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool StunFallBackDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool BurnDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool FreezeDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool ShockDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool PanicDamage;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsDepressed;
-	
+	bool bCanBeNullified;
 };
 USTRUCT(BlueprintType)
 struct FHealthInfo
@@ -90,6 +88,8 @@ struct FHealthInfo
 	int MinHeartBeat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Stamina;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxStamina;
 };
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class POLAR_BEAR_API UAC_DamageComponent : public UActorComponent
@@ -101,8 +101,11 @@ class POLAR_BEAR_API UAC_DamageComponent : public UActorComponent
 		100,
 		70,
 		50,
+		100,
 		100
 	};
+	
+
 	
 public:
 	// Sets default values for this component's properties
@@ -113,14 +116,21 @@ protected:
 	virtual void BeginPlay() override;
     virtual void TakeDamage(double Amount) ;
 	// CAN MAKE IT FIXED AMOUNT SO THAT GAME STAYS SIMPLER 
-	virtual void IncreseStamina	();
-	virtual void DecreseStamina	();
+	virtual void IncreseStamina	(double Amount);
+	virtual void DecreseStamina	(double Amount);
 	//REGENERATION PLAYER MIGHT REGENERATE AFTER TAKING DAMAGE FROM ENEMY
-	virtual void IncreaseHealth	();
+	virtual void IncreaseHealth	(double Amount);
 
 
 	//  HEARTBEAT FUNCTIONS -> HEARBEAT IS DEPENDEND ON EMENY LOCATION AND DISTANCE FROM PLAYER SO IT MIGHT BE COMPLEX
-	virtual void ChangeHeartBeat();
+void IncreseHeartbeat(double Amount);
+
+void DecreseHeartbeat(double Amount);
+
+	// FUNCTION TO CHECK IF CHARACTER IS DEAD
+	bool FbIsDead();    
+	// FUCNTION TO CHECK FOR HEART ATTACK
+	bool FbIsHavingHeartAttack(double ThreashHold);
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
