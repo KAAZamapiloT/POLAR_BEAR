@@ -10,44 +10,45 @@
 UENUM(BlueprintType)
 enum class EEffect: uint8
 {
-	NoDamage,   // DAMAGE IN NULLIFIED
-	UnlimitedStamina, // NO STAMINA REDUCTION 
-	SpedUp,           // 
-	MentallyTough    // NO SANITY DROP 
+	NoDamage,          // DAMAGE IN NULLIFIED
+	UnlimitedStamina,  // NO STAMINA REDUCTION 
+	SpedUp,            // 
+	MentallyTough      // NO SANITY DROP 
 	
 };
 
 UENUM(BlueprintType)
 enum class EDamageType : uint8
 {
-	None UMETA(DisplayName = "None"),
-	Melee UMETA(DisplayName = "Melee"),
-	RangedGun UMETA(DisplayName = "Ranged (Gun)"),
-	RangedThrown UMETA(DisplayName = "Ranged (Thrown)"),
-	Overtime UMETA(DisplayName = "Over Time"),
-	Fire UMETA(DisplayName = "Fire"),
-	Water UMETA(DisplayName = "Water"),
-	Ice UMETA(DisplayName = "Ice"),
-	Poison UMETA(DisplayName = "Poison"),
-	Electric UMETA(DisplayName = "Electric"),
-	Psychic UMETA(DisplayName = "Psychic"),
-	Emotional UMETA(DisplayName = "Emotional"),
-	Cosmic UMETA(DisplayName = "Cosmic"),
-	Explosive UMETA(DisplayName = "Explosive")
+	None            UMETA(DisplayName = "None"),
+	Melee           UMETA(DisplayName = "Melee"),
+	RangedGun       UMETA(DisplayName = "Ranged (Gun)"),
+	RangedThrown    UMETA(DisplayName = "Ranged (Thrown)"),
+	Overtime        UMETA(DisplayName = "Over Time"),
+	Fire            UMETA(DisplayName = "Fire"),
+	Water           UMETA(DisplayName = "Water"),
+	Ice             UMETA(DisplayName = "Ice"),
+	Poison          UMETA(DisplayName = "Poison"),
+	Electric        UMETA(DisplayName = "Electric"),
+	Psychic         UMETA(DisplayName = "Psychic"),
+	Emotional       UMETA(DisplayName = "Emotional"),
+	Cosmic          UMETA(DisplayName = "Cosmic"),
+	Explosive       UMETA(DisplayName = "Explosive")
 };
 UENUM(BlueprintType)
 enum class EDamageReaction : uint8
 {
-	None UMETA(DisplayName = "None"),
-   Stagger UMETA(DisplayName = "Stagger"),
-   Stun UMETA(DisplayName = "Stun"),
-   Fallback UMETA(DisplayName = "Fall Back"),
+
+	None        UMETA(DisplayName = "None"),
+   Stagger      UMETA(DisplayName = "Stagger"),
+   Stun         UMETA(DisplayName = "Stun"),
+   Fallback     UMETA(DisplayName = "Fall Back"),
    StunFallback UMETA(DisplayName = "Stun and Fall Back"),
-   Burn UMETA(DisplayName = "Burn"),
-   Freeze UMETA(DisplayName = "Freeze"),
-   Shock UMETA(DisplayName = "Shock"),
-   Panic UMETA(DisplayName = "Panic"),
-   Depression UMETA(DisplayName = "Depression")
+   Burn         UMETA(DisplayName = "Burn"),
+   Freeze       UMETA(DisplayName = "Freeze"),
+   Shock        UMETA(DisplayName = "Shock"),
+   Panic        UMETA(DisplayName = "Panic"),
+   Depression   UMETA(DisplayName = "Depression")
 };
 
 USTRUCT(BlueprintType)           //THIS DAMAGE INFO IS CREATED FOR A PARTICULAR ATTACK
