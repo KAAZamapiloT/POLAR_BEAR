@@ -118,8 +118,9 @@ void APOLAR_BEARCharacter::WrapJump()
 
 void APOLAR_BEARCharacter::WrapStopJump()
 {
-	bInAir=false;
+	
 	ACharacter::StopJumping();
+	bInAir=false;
 }
 
 void APOLAR_BEARCharacter::Move(const FInputActionValue& Value)
