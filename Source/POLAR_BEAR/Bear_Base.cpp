@@ -19,9 +19,13 @@ void ABear_Base::BeginPlay()
 		
 }
 
+
+
 void ABear_Base::Damage(float DamageAmount)
 {
-	IIA_Damageable::Damage(DamageAmount);
+
+
+	
 }
 
 void ABear_Base::healerDamage(float DamageAmount)
@@ -42,6 +46,11 @@ void ABear_Base::overtimeDamage(float DamageAmount, float duration)
 bool ABear_Base::IsDead()
 {
 	return IIA_Damageable::IsDead();
+}
+
+bool ABear_Base::bIsBlocked()
+{
+	return bBlocked;
 }
 
 bool ABear_Base::IsDamageable()

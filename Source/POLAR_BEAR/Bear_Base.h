@@ -27,13 +27,14 @@ protected:
 	virtual void DamageNullification(float DamageAmount) override;
 	virtual void overtimeDamage(float DamageAmount, float duration) override;
 	virtual bool IsDead() override;
+	virtual bool bIsBlocked();
 	virtual bool IsDamageable() override;
 	virtual double ElementalPunch(FString element, double damage) override;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+    bool bBlocked;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };
