@@ -92,8 +92,8 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
 		
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APOLAR_BEARCharacter::WrapJump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::WrapStopJump);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Move);
@@ -108,6 +108,18 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+void APOLAR_BEARCharacter::WrapJump()
+{
+	bInAir=true;
+	ACharacter::Jump();
+}
+
+void APOLAR_BEARCharacter::WrapStopJump()
+{
+	bInAir=false;
+	ACharacter::StopJumping();
 }
 
 void APOLAR_BEARCharacter::Move(const FInputActionValue& Value)
