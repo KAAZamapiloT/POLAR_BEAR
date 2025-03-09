@@ -95,6 +95,8 @@ bool UAC_DamageComponent::FbIsHavingHeartAttack(double Threashold)
 }
 
 
+
+
 // Called every frame
 void UAC_DamageComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                         FActorComponentTickFunction* ThisTickFunction)

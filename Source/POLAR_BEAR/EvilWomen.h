@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AICEvilWomen.h"
 #include "EvilWomen.generated.h"
 
 UCLASS()
