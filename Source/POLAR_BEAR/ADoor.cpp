@@ -6,6 +6,7 @@
 #include"Components/StaticMeshComponent.h"
 #include"Sound/SoundCue.h"
 #include"Components/AudioComponent.h"
+
 #include"POLAR_BEARCharacter.h"
 // Sets default values
 AADoor::AADoor()
@@ -60,12 +61,15 @@ void AADoor::signal()
 	if(bIsLocked)
 	{
 		Unlock();
+		UE_LOG(LogTemp,Error,TEXT("AADoor::UNlocked -> unlock called due to lack of implementation"));
 	}else if (bIsOpen)
 	{
 		Close();
+		UE_LOG(LogTemp,Error,TEXT("AADoor::IsClosed"));
 	}else
 	{
 		Open();
+		UE_LOG(LogTemp,Error,TEXT("AADoor::IsOpen"));
 	}
 }
 
