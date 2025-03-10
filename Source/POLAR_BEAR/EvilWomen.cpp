@@ -18,6 +18,18 @@ void AEvilWomen::BeginPlay()
 	
 }
 
+void AEvilWomen::PlayMontages()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	int32 r=FMath::RandRange(0,2);
+	if (AnimInstance&&Montages[r])
+	{
+		AnimInstance->Montage_Play(Montages[r]);
+		AnimInstance->Montage_JumpToSection("Default");
+		
+	}
+}
+
 // Called every frame
 void AEvilWomen::Tick(float DeltaTime)
 {

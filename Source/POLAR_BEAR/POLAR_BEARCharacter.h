@@ -19,6 +19,12 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 
 
+UENUM(BlueprintType)
+enum class EState:uint8
+{
+	EAS_Attacking UMETA(DisplayName = "Attacking"),
+	EAS_NotAttacking UMETA(DisplayName = "Not Attacking"),
+};
 
 UCLASS(config=Game)
 class APOLAR_BEARCharacter : public ACharacter
@@ -93,9 +99,11 @@ private:
 	/*  Animation Montages */
 	UPROPERTY(EditDefaultsOnly,Category = "Montages")
 	UAnimMontage* AttackMontage;
-
-
+    UPROPERTY(BlueprintReadWrite,Category = "Montages",meta=(AllowPrivateAccess="true"))
+    EState AttackState=EState::EAS_NotAttacking;
 	void PlayMontage();
+    UFUNCTION(BlueprintCallable)
+	void AttackEnd();
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -104,8 +112,7 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAir=false;
 	
-
-	
-	
 };
+
+
 

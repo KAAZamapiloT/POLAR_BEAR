@@ -123,6 +123,11 @@ void APOLAR_BEARCharacter::PlayMontage()
 	}
 }
 
+void APOLAR_BEARCharacter::AttackEnd()
+{
+	AttackState=EState::EAS_NotAttacking;
+}
+
 void APOLAR_BEARCharacter::WrapJump()
 {
 	bInAir=true;
@@ -142,7 +147,12 @@ void APOLAR_BEARCharacter::Intract()
 // THIS FUNCTION WOULD BE USEFUL FOR EVIL WOMEN CLASS BECCAUSE THE EVIL WOMEN ALSO HAS TO ATTACK PLAYER
 void APOLAR_BEARCharacter::Attack()
 {
-PlayMontage();
+	if (AttackState==EState::EAS_NotAttacking)
+	{
+		PlayMontage();
+		AttackState=EState::EAS_Attacking;
+	}
+
 	
 }
 
