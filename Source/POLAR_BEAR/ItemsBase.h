@@ -15,8 +15,15 @@ enum class ItemType:uint8
 	Document,
 	Consumeable
 };
-
-
+UENUM(Blueprintable)
+enum class ItemStatus:uint8
+{
+	Equipped,
+	Unequipped,
+	Used,
+	Shine,
+	Outline
+};
 UCLASS()
 class POLAR_BEAR_API AItemsBase : public AActor
 {
