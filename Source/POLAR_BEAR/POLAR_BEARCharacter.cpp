@@ -24,7 +24,7 @@
 #include "Kismet/GameplayStatics.h"    // For gameplay utilities (applying damage, spawning effects, etc.).
 #include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
 #include "GameFramework/InputSettings.h" // For standard input handling.
-
+#include "Animation/AnimMontage.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -103,12 +103,23 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		//Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Sprint);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::StopSprint);
-
+        EnhancedInputComponent->BindAction(WeakAttackAction,ETriggerEvent::Started,this,&APOLAR_BEARCharacter::Attack);
 		EnhancedInputComponent->BindAction(Intraction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::Intract);
 	}
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
+}
+
+void APOLAR_BEARCharacter::PlayMontage()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance&&AttackMontage)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		AnimInstance->Montage_JumpToSection("Default");
+		UE_LOG(LogTemplateCharacter, Display, TEXT("Attacking ..."));
 	}
 }
 
@@ -127,6 +138,12 @@ void APOLAR_BEARCharacter::WrapStopJump()
 
 void APOLAR_BEARCharacter::Intract()
 {
+}
+// THIS FUNCTION WOULD BE USEFUL FOR EVIL WOMEN CLASS BECCAUSE THE EVIL WOMEN ALSO HAS TO ATTACK PLAYER
+void APOLAR_BEARCharacter::Attack()
+{
+PlayMontage();
+	
 }
 
 

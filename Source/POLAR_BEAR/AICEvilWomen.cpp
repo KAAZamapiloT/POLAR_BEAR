@@ -24,6 +24,7 @@ void AAICEvilWomen::BeginPlay()
 	{
 		RunBehaviorTree(BehaviorTree.Get());
 		BehaviorTreeComponent->StartTree(*BehaviorTree.Get());  // giving refrence to behavior  tree
+		UE_LOG(LogTemp,Warning,TEXT("behavior terre was valod"));
 	}
 	
 }

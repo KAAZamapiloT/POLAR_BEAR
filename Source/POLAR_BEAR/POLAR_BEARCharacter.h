@@ -14,7 +14,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
-
+class UAnimMontage;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 
@@ -62,7 +62,10 @@ public:
 	
 
 protected:
-
+/*
+ *   CALLBACKS TO INPUT
+ *   
+ */
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
@@ -74,12 +77,25 @@ protected:
    void StopSprint();
 /** Weak attack -> Faster -> Deals_less_Damage*/ 
 void weak_attack();
+	void WrapJump();
+	void WrapStopJump();
+	void Intract();
+	void Attack();
 protected:
 
 	virtual void NotifyControllerChanged() override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+
+private:
+
+	/*  Animation Montages */
+	UPROPERTY(EditDefaultsOnly,Category = "Montages")
+	UAnimMontage* AttackMontage;
+
+
+	void PlayMontage();
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -87,9 +103,9 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAir=false;
-	void WrapJump();
-	void WrapStopJump();
-	void Intract();
+	
+
+	
 	
 };
 
