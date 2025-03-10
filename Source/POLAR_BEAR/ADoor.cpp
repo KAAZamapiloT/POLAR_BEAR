@@ -49,3 +49,20 @@ bool AADoor::IsLocked()
 	return bIsLocked;
 }
 
+
+// THIS FUNCTION WILL TELL US ALL ABOUT WHAT TO DO WITH DOOR BASED ON ITS CONDITION	 IF ITS LOCKED TRY TO UNLOCK AND PLAY UNLOCK SOUND
+void AADoor::signal()
+{
+	IIA_intractable::signal();
+	if(bIsLocked)
+	{
+		Unlock();
+	}else if (bIsOpen)
+	{
+		Close();
+	}else
+	{
+		Open();
+	}
+}
+

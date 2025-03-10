@@ -4,13 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "IA_intractable.h"
 #include "ADoor.generated.h"
+class AAPuzzle;
 class UStaticMeshComponent;
 class UBoxComponent;
 class USoundCue;
 class UAudioComponent;
 UCLASS()
-class POLAR_BEAR_API AADoor : public AActor
+class POLAR_BEAR_API AADoor : public AActor ,public IIA_intractable
 {
 	GENERATED_BODY()
 public:
@@ -56,4 +58,12 @@ public:
 	bool IsLocked();
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsLocked=false;
+
+	// TO DO -> ADD INPUT U ITEM AS OVERRIDE
+	UFUNCTION(BlueprintCallable,BlueprintCallable)
+	void signal() override;
+
+	
+	
+	
 };

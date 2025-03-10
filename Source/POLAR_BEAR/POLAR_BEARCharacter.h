@@ -54,6 +54,9 @@ class APOLAR_BEARCharacter : public ACharacter
     	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* WeakAttackAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* Intraction;
 public:
 	APOLAR_BEARCharacter();
 	
@@ -86,5 +89,7 @@ public:
 	bool bInAir=false;
 	void WrapJump();
 	void WrapStopJump();
+	void Intract();
+	
 };
 

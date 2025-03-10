@@ -103,6 +103,8 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		//Sprinting
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Sprint);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::StopSprint);
+
+		EnhancedInputComponent->BindAction(Intraction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::Intract);
 	}
 	else
 	{
@@ -122,6 +124,11 @@ void APOLAR_BEARCharacter::WrapStopJump()
 	ACharacter::StopJumping();
 	bInAir=false;
 }
+
+void APOLAR_BEARCharacter::Intract()
+{
+}
+
 
 void APOLAR_BEARCharacter::Move(const FInputActionValue& Value)
 {

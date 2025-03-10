@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Runtime/AIModule/Classes/AIController.h"
+#include "IA_Damageable.h"
 #include "AICEvilWomen.generated.h"
+
+class UBehaviorTreeComponent;
 
 UCLASS()
 class POLAR_BEAR_API AAICEvilWomen : public AAIController
@@ -18,8 +21,16 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+    virtual void OnPossess(APawn* InPawn) override;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+private:
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
+	TObjectPtr<UBlackboardComponent> BlackboardComponent;
+	UPROPERTY(EditInstanceOnly,BlueprintReadOnly,Category="AI",meta=(AllowPrivateAccess=true))
+	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
+	UPROPERTY(EditInstanceOnly,BlueprintReadOnly,Category="AI",meta=(AllowPrivateAccess=true))
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+	
 };
