@@ -147,7 +147,7 @@ void APOLAR_BEARCharacter::Intract()
 // THIS FUNCTION WOULD BE USEFUL FOR EVIL WOMEN CLASS BECCAUSE THE EVIL WOMEN ALSO HAS TO ATTACK PLAYER
 void APOLAR_BEARCharacter::Attack()
 {
-	if (AttackState==EState::EAS_NotAttacking)
+	if (AttackState==EState::EAS_NotAttacking&&bIsIntracting)
 	{
 		PlayMontage();
 		AttackState=EState::EAS_Attacking;

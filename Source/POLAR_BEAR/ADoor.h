@@ -18,10 +18,10 @@ class POLAR_BEAR_API AADoor : public AActor ,public IIA_intractable
 public:
 	//UPROPERTY(BlueprintReadWrite)
 	// UItem RequiredKey;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UBoxComponent*CollisionComponent;
 	
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UStaticMeshComponent*DoorMesh;
 	
 	

@@ -6,6 +6,7 @@
 #include"Components/StaticMeshComponent.h"
 #include"Sound/SoundCue.h"
 #include"Components/AudioComponent.h"
+#include"POLAR_BEARCharacter.h"
 // Sets default values
 AADoor::AADoor()
 {
@@ -14,6 +15,8 @@ AADoor::AADoor()
 	CollisionComponent=CreateDefaultSubobject<UBoxComponent>(TEXT("BOX COLLIDER"));
 	DoorMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DOOR MESH"));
 	AudioComponent=CreateDefaultSubobject<UAudioComponent>(TEXT("AUDIO"));
+	CollisionComponent->SetupAttachment(DoorMesh);
+	
 }
 
 // Called when the game starts or when spawned
@@ -65,4 +68,6 @@ void AADoor::signal()
 		Open();
 	}
 }
+
+
 

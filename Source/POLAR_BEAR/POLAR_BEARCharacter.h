@@ -111,8 +111,14 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAir=false;
+UPROPERTY(BlueprintReadWrite)
+	bool bIsIntracting=false;
 	
 };
 
+
+
+
+// SINCE ATTACKING WOULD HAVE NO EFFECT ON ENEMY ATTACKING WOULD FUNCTION AS INTRACTION RATHER THAN ATTACKING
 
 
