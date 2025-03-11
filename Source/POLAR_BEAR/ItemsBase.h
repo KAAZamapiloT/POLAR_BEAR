@@ -62,4 +62,14 @@ UPROPERTY(BlueprintReadWrite)
 	}
 		return false;
 	}
+	UFUNCTION(BlueprintCallable)
+	void SetName(FName name)
+	{
+		ItemName = name;
+	}
+	UFUNCTION(BlueprintCallable)
+	void SetDescription(FName description)
+	{
+		ItemDescreption = description;
+	}
 };
