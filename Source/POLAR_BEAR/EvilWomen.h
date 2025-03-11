@@ -38,7 +38,8 @@ protected:
 	{
 		AttackState=EactionState::EAS_NotAttacking;
 	}
-
+   UFUNCTION(BlueprintCallable)
+	void AttackTrace();
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -54,6 +55,7 @@ inline void AEvilWomen::Attack()
 if (AttackState==EactionState::EAS_NotAttacking)
 {
 	PlayMontages();
+	AttackTrace();
 	AttackState=EactionState::EAS_Attacking;
 }
 	
