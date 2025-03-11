@@ -26,6 +26,7 @@
 #include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
 #include "GameFramework/InputSettings.h" // For standard input handling.
 #include "Animation/AnimMontage.h"
+#include"IA_Hideable.h"
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
@@ -162,18 +163,18 @@ void APOLAR_BEARCharacter::Intract()
 		for (auto& Hit : HitResults)
 		{
 			AActor* HitActor = Hit.GetActor();
-			if (Hit.GetActor())  // Ensure valid actor was hit
+			if (Hit.GetActor())  
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
 			}
 			if (HitActor->Implements<UIA_intractable>())
              {
              	UE_LOG(LogTemp, Warning, TEXT("Hit Actor Implemets interface: %s"), *Hit.GetActor()->GetName());
-				// ✅ Correct Interface Cast
+				
 				IIA_intractable* Intractable = Cast<IIA_intractable>(HitActor);
 				if (Intractable)
 				{
-					Intractable->signal();  // Call interface function
+					Intractable->signal();  
 					UE_LOG(LogTemp, Error, TEXT("Signal Is Called: %s"), *HitActor->GetName());
 				}
              }
@@ -190,11 +191,80 @@ void APOLAR_BEARCharacter::Attack()
 	{
 		PlayMontage();
 		Intract();
+		HideAction();
+		if (bIsHidden)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("TRUE"));
+		}else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("FALSE"));
+		}
+		
 		AttackState=EState::EAS_Attacking;
 	}
-
+	if (bIsHidden){
+		UE_LOG(LogTemp, Warning, TEXT("TRUE"));
+	}else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FALSE"));
+	}
+		
 	
 }
+
+void APOLAR_BEARCharacter::HideAction()
+{
+	FVector StartLocation=GetActorLocation();
+	
+	FVector EndLocation=StartLocation+100*GetActorForwardVector();
+	FHitResult rHit;
+	TArray<FHitResult> HitResults;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+	bool bHit = GetWorld()->LineTraceMultiByChannel(HitResults, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+	DrawDebugLine(GetWorld(),StartLocation,EndLocation,FColor::Green,false,1,0,5);
+	if(ActorLineTraceSingle(rHit, StartLocation, EndLocation, ECC_WorldStatic, CollisionParams))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *rHit.GetComponent()->GetName()));
+	}
+	if (bHit)
+	{
+		for (auto& Hit : HitResults)
+		{
+			AActor* HitActor = Hit.GetActor();
+			if (Hit.GetActor())  
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
+			}
+			if (HitActor->Implements<UIA_Hideable>())
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor Implemets interface: %s"), *Hit.GetActor()->GetName());
+				
+				IIA_Hideable* Intractable = Cast<IIA_Hideable>(HitActor);
+				if (Intractable)
+				{
+					if (bIsHidden)
+					{
+						Intractable->Unhide();
+						
+					}else
+					{
+						Intractable->Hide();
+						
+					}
+					bIsHidden = !bIsHidden;
+					
+					UE_LOG(LogTemp, Error, TEXT("Signal Is Called: %s"), *HitActor->GetName());
+				}
+			}
+			// Draw debug sphere at each hit location
+			DrawDebugSphere(GetWorld(), Hit.ImpactPoint, 10.0f, 12, FColor::Green, false, 2.0f);
+		}
+	}
+	
+	
+}
+
 
 
 void APOLAR_BEARCharacter::Move(const FInputActionValue& Value)

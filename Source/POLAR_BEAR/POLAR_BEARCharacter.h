@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
+
 #include "AC_DamageComponent.h"
 #include "POLAR_BEARCharacter.generated.h"
 
@@ -85,8 +86,10 @@ protected:
 void weak_attack();
 	void WrapJump();
 	void WrapStopJump();
+	
 	void Intract();
 	void Attack();
+	void HideAction();
 protected:
 
 	virtual void NotifyControllerChanged() override;
@@ -113,7 +116,8 @@ public:
 	bool bInAir=false;
 UPROPERTY(BlueprintReadWrite)
 	bool bIsIntracting=false;
-	
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsHidden=false;
 };
 
 
