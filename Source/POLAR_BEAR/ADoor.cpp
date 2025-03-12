@@ -8,6 +8,7 @@
 #include"Components/AudioComponent.h"
 
 #include"POLAR_BEARCharacter.h"
+#include "AKey.h"
 // Sets default values
 AADoor::AADoor()
 {
@@ -57,6 +58,7 @@ bool AADoor::IsLocked()
 // THIS FUNCTION WILL TELL US ALL ABOUT WHAT TO DO WITH DOOR BASED ON ITS CONDITION	 IF ITS LOCKED TRY TO UNLOCK AND PLAY UNLOCK SOUND
 void AADoor::signal()
 {
+	
 	IIA_intractable::signal();
 	if(bIsLocked)
 	{
@@ -72,6 +74,19 @@ void AADoor::signal()
 		UE_LOG(LogTemp,Error,TEXT("AADoor::IsOpen"));
 	}
 }
+
+void AADoor::DoorOpen(FString Key,FString KeyType)
+{
+	if (Key == KeyMap)
+	{
+		bIsLocked = false;
+	}else if (KeyType=="Master"&&DoorType==EDoorType::EDT_Normal)
+	{
+		bIsLocked = false;
+	}
+}
+
+
 
 
 
