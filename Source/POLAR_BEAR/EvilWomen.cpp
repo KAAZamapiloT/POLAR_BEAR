@@ -3,12 +3,18 @@
 
 #include "EvilWomen.h"
 
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/PawnSensingComponent.h"
+
 
 // Sets default values
 AEvilWomen::AEvilWomen()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	PerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
+	
 }
 
 // Called when the game starts or when spawned

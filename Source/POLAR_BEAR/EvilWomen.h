@@ -9,6 +9,7 @@
 #include "EvilWomen.generated.h"
 class UAnimMontage;
 
+class UAIPerceptionComponent;
 
 UENUM(BlueprintType)
 enum class EactionState:uint8
@@ -18,7 +19,7 @@ enum class EactionState:uint8
 };
 
 UCLASS()
-class POLAR_BEAR_API AEvilWomen : public ACharacter
+class POLAR_BEAR_API AEvilWomen : public ACharacter ,public IIA_Damageable
 {
 	GENERATED_BODY()
 
@@ -29,6 +30,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	UAIPerceptionComponent* PerceptionComponent;
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
 	TArray<UAnimMontage*>Montages;
     EactionState AttackState=EactionState::EAS_NotAttacking;
