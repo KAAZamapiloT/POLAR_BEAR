@@ -10,9 +10,9 @@
 class AAPuzzle;
 class UStaticMeshComponent;
 class UBoxComponent;
-class USoundCue;
+class USoundBase;
 class UAudioComponent;
-
+class AAKey;
 UENUM(BlueprintType)
 enum class EDoorType : uint8
 {
@@ -33,17 +33,18 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UStaticMeshComponent*DoorMesh;
+
 	
 	
 // sound for doors
 	UPROPERTY(BlueprintReadWrite,Category="Sounds")
 	UAudioComponent*AudioComponent;
 	UPROPERTY(BlueprintReadWrite,Category="Sounds")
-	USoundCue*OpenSound=nullptr;
+	USoundBase*OpenSound=nullptr;
 	UPROPERTY(BlueprintReadWrite,Category="Sounds")
-	USoundCue*CloseSound=nullptr;
+	USoundBase*CloseSound=nullptr;
 	UPROPERTY(BlueprintReadWrite,Category="Sounds")
-	USoundCue*LockSound=nullptr;
+	USoundBase*LockSound=nullptr;
     UPROPERTY(BlueprintReadWrite,Category="Puzzle")
 	FString KeyMap;
 	UPROPERTY(BlueprintReadWrite)
@@ -72,10 +73,12 @@ public:
     UPROPERTY(BlueprintReadWrite)
 	EDoorType DoorType=EDoorType::EDT_Normal;
 	// TO DO -> ADD INPUT U ITEM AS OVERRIDE
+	UPROPERTY(BlueprintReadWrite,Category="Puzzle")
+	AAKey* Key=nullptr;
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
 	void signal() override;
     
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
-	void DoorOpen(FString Key,FString KeyType);
+	void DoorOpen(FString KeyName,FString KeyType);
 	
 };

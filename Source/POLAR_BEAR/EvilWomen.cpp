@@ -4,6 +4,7 @@
 #include "EvilWomen.h"
 
 #include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISenseConfig_Sight.h"
 #include "Perception/PawnSensingComponent.h"
 
 
@@ -14,6 +15,11 @@ AEvilWomen::AEvilWomen()
 	PrimaryActorTick.bCanEverTick = true;
 
 	PerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
+	SightConfig->AutoSuccessRangeFromLastSeenLocation=true;
+	SightConfig->SightRadius=150;
+	SightConfig->NearClippingRadius=2;
+	SightConfig->LoseSightRadius=200;
+	SightConfig->PeripheralVisionAngleDegrees=45;
 	
 }
 

@@ -10,7 +10,7 @@
 class UAnimMontage;
 
 class UAIPerceptionComponent;
-
+class UAISenseConfig_Sight;
 UENUM(BlueprintType)
 enum class EactionState:uint8
 {
@@ -50,6 +50,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	UAISenseConfig_Sight* SightConfig;
 	UFUNCTION(BlueprintCallable)
 	void Attack();
 };

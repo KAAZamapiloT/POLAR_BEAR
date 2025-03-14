@@ -4,7 +4,8 @@
 #include "ADoor.h"
 #include"Components/BoxComponent.h"
 #include"Components/StaticMeshComponent.h"
-#include"Sound/SoundCue.h"
+#include"Kismet/GameplayStatics.h"
+#include"Sound/SoundBase.h"
 #include"Components/AudioComponent.h"
 
 #include"POLAR_BEARCharacter.h"
@@ -18,14 +19,14 @@ AADoor::AADoor()
 	DoorMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("DOOR MESH"));
 	AudioComponent=CreateDefaultSubobject<UAudioComponent>(TEXT("AUDIO"));
 	CollisionComponent->SetupAttachment(DoorMesh);
-	
+	AudioComponent->SetupAttachment(CollisionComponent);
 }
 
 // Called when the game starts or when spawned
 void AADoor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	AudioComponent->Play();
 }
 
 // Called every frame
@@ -75,9 +76,9 @@ void AADoor::signal()
 	}
 }
 
-void AADoor::DoorOpen(FString Key,FString KeyType)
+void AADoor::DoorOpen(FString KeyName,FString KeyType)
 {
-	if (Key == KeyMap)
+	if (KeyName == KeyMap)
 	{
 		bIsLocked = false;
 	}else if (KeyType=="Master"&&DoorType==EDoorType::EDT_Normal)
