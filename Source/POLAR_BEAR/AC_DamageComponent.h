@@ -132,8 +132,8 @@ void DecreseHeartbeat(double Amount);
 	bool FbIsDead();    
 	// FUCNTION TO CHECK FOR HEART ATTACK
 	bool FbIsHavingHeartAttack(double ThreashHold);
-	
-
+	UFUNCTION(BlueprintCallable)
+   
 public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,

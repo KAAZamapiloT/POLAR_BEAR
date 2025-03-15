@@ -32,4 +32,6 @@ public:
 	virtual bool IsDamageable() { return true; }
 	virtual bool IsDead(){return false;}
 	virtual double ElementalPunch(FString element,double damage) {return 0;}
+	
+
 };
