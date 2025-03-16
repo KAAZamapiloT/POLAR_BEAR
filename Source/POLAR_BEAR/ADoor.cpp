@@ -10,6 +10,7 @@
 
 #include"POLAR_BEARCharacter.h"
 #include "AKey.h"
+#include "SQCapture.h"
 // Sets default values
 AADoor::AADoor()
 {
@@ -63,7 +64,11 @@ void AADoor::signal()
 	IIA_intractable::signal();
 	if(bIsLocked)
 	{
-	
+	/*
+	 * A DOOR CHECK AND AN OVERLAP EVENT REACTION CAN BE ADDED HERE
+	 * WHERE A FUNCTION WOULD CHECK IN PLAYERS INVENTORY WHETHER PLAYER CONTAINS A KEY AND OR NOT
+	 * PRIORITY OF KEY -> MASTER KEY > NORMAL KEY > ESCAPE KEY  
+	 */
 		UE_LOG(LogTemp,Error,TEXT("AADoor::UNlocked -> unlock called due to lack of implementation"));
 	}else if (bIsOpen)
 	{
@@ -78,6 +83,11 @@ void AADoor::signal()
 	}
 }
 
+void AADoor::OverlapEvent()
+{
+	
+}
+
 void AADoor::DoorOpen(FString KeyName,FString KeyType)
 {
 	if (KeyName == KeyMap)
@@ -88,6 +98,8 @@ void AADoor::DoorOpen(FString KeyName,FString KeyType)
 		bIsLocked = false;
 	}
 }
+
+
 
 
 

@@ -6,8 +6,8 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
+#include "IA_Damageable.h"
 
-#include "AC_DamageComponent.h"
 #include "POLAR_BEARCharacter.generated.h"
 
 class USpringArmComponent;
@@ -16,6 +16,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class UAnimMontage;
+
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 
@@ -28,7 +29,7 @@ enum class EState:uint8
 };
 
 UCLASS(config=Game)
-class APOLAR_BEARCharacter : public ACharacter
+class APOLAR_BEARCharacter : public ACharacter,public IIA_Damageable
 {
 	GENERATED_BODY()
 
@@ -118,6 +119,8 @@ UPROPERTY(BlueprintReadWrite)
 	bool bIsIntracting=false;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsHidden=false;
+
+    void Damage(float DamageAmount) override;
 };
 
 

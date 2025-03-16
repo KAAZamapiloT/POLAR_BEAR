@@ -27,6 +27,7 @@
 #include "Kismet/GameplayStatics.h"    // For gameplay utilities (applying damage, spawning effects, etc.).
 #include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
 #include "GameFramework/InputSettings.h" // For standard input handling.
+#include "AC_DamageComponent.h"
 #include "Animation/AnimMontage.h"
 #include"IA_Hideable.h"
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -129,6 +130,11 @@ void APOLAR_BEARCharacter::PlayMontage()
 void APOLAR_BEARCharacter::AttackEnd()
 {
 	AttackState=EState::EAS_NotAttacking;
+}
+
+void APOLAR_BEARCharacter::Damage(float DamageAmount)
+{
+	IIA_Damageable::Damage(DamageAmount);
 }
 
 void APOLAR_BEARCharacter::WrapJump()

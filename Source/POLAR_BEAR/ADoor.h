@@ -49,6 +49,7 @@ public:
 	FString KeyMap;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsOpen=true;
+	
 public:
 	// Sets default values for this actor's properties 
 	AADoor();
@@ -68,7 +69,7 @@ public:
 	bool Unlock();
 	UFUNCTION(BlueprintCallable,Blueprintable)
 	bool IsLocked();
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	bool bIsLocked=false;
     UPROPERTY(BlueprintReadWrite)
 	EDoorType DoorType=EDoorType::EDT_Normal;
@@ -77,8 +78,12 @@ public:
 	AAKey* Key=nullptr;
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
 	void signal() override;
-    
+	UPROPERTY(BlueprintReadWrite)
+	ACharacter*OverlappedCharacter=nullptr;
+    void OverlapEvent();
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
-	void DoorOpen(FString KeyName,FString KeyType);
+	void DoorOpen(FString KeyName,FString KeyType);// CASTING IN BLUEPRINTS AND CHECKING IT AGANIS T PLAYER CLASS INVENTORY FO KEY 
+	
+  
 	
 };
