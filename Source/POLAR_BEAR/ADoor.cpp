@@ -63,15 +63,17 @@ void AADoor::signal()
 	IIA_intractable::signal();
 	if(bIsLocked)
 	{
-		Unlock();
+	
 		UE_LOG(LogTemp,Error,TEXT("AADoor::UNlocked -> unlock called due to lack of implementation"));
 	}else if (bIsOpen)
 	{
 		Close();
+	
 		UE_LOG(LogTemp,Error,TEXT("AADoor::IsClosed"));
 	}else
 	{
 		Open();
+	
 		UE_LOG(LogTemp,Error,TEXT("AADoor::IsOpen"));
 	}
 }
@@ -86,6 +88,8 @@ void AADoor::DoorOpen(FString KeyName,FString KeyType)
 		bIsLocked = false;
 	}
 }
+
+
 
 
 

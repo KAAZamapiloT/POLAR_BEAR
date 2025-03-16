@@ -15,9 +15,7 @@ class POLAR_BEAR_API UEvilWomen_TaskFindPlayer : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 public:
-	UEvilWomen_TaskFindPlayer();
-	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
-	virtual FString GetStaticDescription() const override;
+	
 
 	UFUNCTION(BlueprintCallable)
 	void FindPlayer();

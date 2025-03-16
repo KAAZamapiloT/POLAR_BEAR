@@ -14,12 +14,7 @@ AEvilWomen::AEvilWomen()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
-	SightConfig->AutoSuccessRangeFromLastSeenLocation=true;
-	SightConfig->SightRadius=150;
-	SightConfig->NearClippingRadius=2;
-	SightConfig->LoseSightRadius=200;
-	SightConfig->PeripheralVisionAngleDegrees=45;
+	
 	
 }
 
