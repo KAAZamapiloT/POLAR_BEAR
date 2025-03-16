@@ -27,7 +27,7 @@
 #include "Kismet/GameplayStatics.h"    // For gameplay utilities (applying damage, spawning effects, etc.).
 #include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
 #include "GameFramework/InputSettings.h" // For standard input handling.
-#include "AC_DamageComponent.h"
+
 #include "Animation/AnimMontage.h"
 #include"IA_Hideable.h"
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -69,6 +69,8 @@ APOLAR_BEARCharacter::APOLAR_BEARCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+
+	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -132,9 +134,17 @@ void APOLAR_BEARCharacter::AttackEnd()
 	AttackState=EState::EAS_NotAttacking;
 }
 
+void APOLAR_BEARCharacter::JustDie()
+{
+	GetCharacterMovement()->DisableMovement();
+	bIsDead=true;
+	++DeathCount;
+}
+
 void APOLAR_BEARCharacter::Damage(float DamageAmount)
 {
 	IIA_Damageable::Damage(DamageAmount);
+	JustDie();
 }
 
 void APOLAR_BEARCharacter::WrapJump()

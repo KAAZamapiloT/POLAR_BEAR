@@ -7,7 +7,6 @@
 #include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
 #include "IA_Damageable.h"
-
 #include "POLAR_BEARCharacter.generated.h"
 
 class USpringArmComponent;
@@ -113,17 +112,24 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAir=false;
 UPROPERTY(BlueprintReadWrite)
 	bool bIsIntracting=false;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsHidden=false;
-
+    void JustDie();
     void Damage(float DamageAmount) override;
+    bool bIsDead = false;
+	int DeathCount=0;
+	void  ResetDamage();
 };
-
-
+// IF PLAYER RESPAWNING ABILTY CAN GET CREATED 
+inline void APOLAR_BEARCharacter::ResetDamage()  
+{
+	bIsDead=false;
+}
 
 
 // SINCE ATTACKING WOULD HAVE NO EFFECT ON ENEMY ATTACKING WOULD FUNCTION AS INTRACTION RATHER THAN ATTACKING
