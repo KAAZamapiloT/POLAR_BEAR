@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "Logging/LogMacros.h"
 #include "IA_Damageable.h"
+#include "KeysInventory.h"
+
 #include "POLAR_BEARCharacter.generated.h"
 
 class USpringArmComponent;
@@ -15,7 +17,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class UAnimMontage;
-
+class UAInventoryComponent;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 
@@ -84,9 +86,10 @@ protected:
    void StopSprint();
 /** Weak attack -> Faster -> Deals_less_Damage*/ 
 void weak_attack();
+/*warp jump -> trying to fix aimations during character jumps*/
 	void WrapJump();
 	void WrapStopJump();
-	
+/* ALL THESE ACTIONS AHAVE SAME BASE HAVE A ENVIROMENTAL QUERY AND THEN CHECK WHAT IS POSSIBLE*/
 	void Intract();
 	void Attack();
 	void HideAction();
@@ -97,8 +100,8 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
+	
 private:
-
 	/*  Animation Montages */
 	UPROPERTY(EditDefaultsOnly,Category = "Montages")
 	UAnimMontage* AttackMontage;
@@ -124,7 +127,13 @@ UPROPERTY(BlueprintReadWrite)
     bool bIsDead = false;
 	int DeathCount=0;
 	void  ResetDamage();
+	bool bCheckKeyString(FString KeyString);
+	bool bCheckMasterString();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	class UKeysInventory *KInventory;
 };
+
+
 // IF PLAYER RESPAWNING ABILTY CAN GET CREATED 
 inline void APOLAR_BEARCharacter::ResetDamage()  
 {

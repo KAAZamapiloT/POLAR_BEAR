@@ -21,13 +21,13 @@ enum class EDoorType : uint8
 	EDT_Special UMETA(DisplayName = "Special")
 };
 
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class POLAR_BEAR_API AADoor : public AActor ,public IIA_intractable
 {
 	GENERATED_BODY()
 public:
-	//UPROPERTY(BlueprintReadWrite)
-	// UItem RequiredKey;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	class AAKey* RequiredKey;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UBoxComponent*CollisionComponent;
 	
@@ -45,7 +45,7 @@ public:
 	USoundBase*CloseSound=nullptr;
 	UPROPERTY(BlueprintReadWrite,Category="Sounds")
 	USoundBase*LockSound=nullptr;
-    UPROPERTY(BlueprintReadWrite,Category="Puzzle")
+    UPROPERTY(BlueprintReadWrite,EditAnywhere,Category="Puzzle")
 	FString KeyMap;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsOpen=true;
@@ -74,16 +74,15 @@ public:
     UPROPERTY(BlueprintReadWrite)
 	EDoorType DoorType=EDoorType::EDT_Normal;
 	// TO DO -> ADD INPUT U ITEM AS OVERRIDE
-	UPROPERTY(BlueprintReadWrite,Category="Puzzle")
-	AAKey* Key=nullptr;
+	
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
-	void signal() override;
+	void Signal() override;
 	UPROPERTY(BlueprintReadWrite)
 	ACharacter*OverlappedCharacter=nullptr;
     void OverlapEvent();
 	UFUNCTION(BlueprintCallable,BlueprintCallable)
 	void DoorOpen(FString KeyName,FString KeyType);// CASTING IN BLUEPRINTS AND CHECKING IT AGANIS T PLAYER CLASS INVENTORY FO KEY 
 	
-  
+    void RevCast() override;
 	
 };

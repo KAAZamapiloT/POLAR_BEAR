@@ -3,6 +3,7 @@
 #include "POLAR_BEARCharacter.h"
 
 #include "ADoor.h"
+#include "AInventoryComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -27,9 +28,12 @@
 #include "Kismet/GameplayStatics.h"    // For gameplay utilities (applying damage, spawning effects, etc.).
 #include "InputActionValue.h"          // For Enhanced Input System (UE5-specific).
 #include "GameFramework/InputSettings.h" // For standard input handling.
-
+#include"AKey.h"
+#include"AInventoryComponent.h"
+#include"KeysInventory.h"
 #include "Animation/AnimMontage.h"
 #include"IA_Hideable.h"
+#include "KeysInventory.h"
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
@@ -69,7 +73,7 @@ APOLAR_BEARCharacter::APOLAR_BEARCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-
+	KInventory=CreateDefaultSubobject<UKeysInventory>(TEXT("KInventory"));
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -116,6 +120,16 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+bool APOLAR_BEARCharacter::bCheckKeyString(FString KeyString)
+{
+	return KInventory->KeyNames.Contains(KeyString);
+}
+
+bool APOLAR_BEARCharacter::bCheckMasterString()
+{
+	return KInventory->KeyNames.Contains("MasterKey");
 }
 
 void APOLAR_BEARCharacter::PlayMontage()
@@ -192,7 +206,7 @@ void APOLAR_BEARCharacter::Intract()
 				IIA_intractable* Intractable = Cast<IIA_intractable>(HitActor);
 				if (Intractable)
 				{
-					Intractable->signal();  
+					Intractable->Signal();  
 					UE_LOG(LogTemp, Error, TEXT("Signal Is Called: %s"), *HitActor->GetName());
 				}
              }

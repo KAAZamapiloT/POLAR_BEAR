@@ -14,7 +14,7 @@ enum class EKeyType : uint8
 	EKT_Escape UMETA(DisplayName = "ESCAPE"),
 };
 class USoundCue;
-UCLASS()
+UCLASS(Blueprintable,BlueprintType)
 class POLAR_BEAR_API AAKey : public AItemsBase
 {
 	GENERATED_BODY()
@@ -23,12 +23,19 @@ public:
 	// Sets default values for this actor's properties
 	AAKey();
 
-protected:
+public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-    ItemType  isKey=ItemType::Key;
+	
+    ItemType  Type=ItemType::Key;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Key")
+	EKeyType KeyType=EKeyType::EKT_Normal;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Key")
 	USoundCue* sound;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Key")
+	FString Code;
+	
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

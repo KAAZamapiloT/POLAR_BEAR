@@ -20,10 +20,19 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+
+
+public:
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
+	                           FActorComponentTickFunction* ThisTickFunction) override;
+	// INVENTORY AS AN ARRAY
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
-	TArray<AActor*> Inventory;
-    UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void SetInventory(TArray<AActor*> NewInventory);
+	TArray< AItemsBase*> Inventory;
+	//IMPORTANT FUNCTIONS FOR INVENTORY
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SetInventory(TArray<AItemsBase*> NewInventory);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	bool bContains(AItemsBase* Item);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
@@ -31,8 +40,5 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddItem(AItemsBase* item);
 
-public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
+	
 };

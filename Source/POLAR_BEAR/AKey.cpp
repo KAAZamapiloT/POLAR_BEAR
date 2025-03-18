@@ -3,6 +3,8 @@
 
 #include "AKey.h"
 
+#include "FileCache.h"
+
 
 // Sets default values
 AAKey::AAKey()
@@ -17,6 +19,8 @@ void AAKey::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+
 
 // Called every frame
 void AAKey::Tick(float DeltaTime)

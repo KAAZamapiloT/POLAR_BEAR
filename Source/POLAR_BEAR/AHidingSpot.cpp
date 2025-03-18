@@ -42,9 +42,9 @@ void AAHidingSpot::Unhide()
 	UE_LOG(LogTemp, Display, TEXT("AAHidingSpot -> Unhide"));
 }
 
-void AAHidingSpot::signal()
+void AAHidingSpot::Signal()
 {
-	IIA_intractable::signal();
+	IIA_intractable::Signal();
 	UE_LOG(LogTemp, Display, TEXT("AAHidingSpot -> signal"));
 }
 

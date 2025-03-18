@@ -50,5 +50,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Unhide() override;
 	UFUNCTION(BlueprintCallable)
-	void signal() override;
+	void Signal() override;
 };

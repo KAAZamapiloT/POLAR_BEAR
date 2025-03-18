@@ -2,7 +2,7 @@
 
 
 #include "AInventoryComponent.h"
-
+#include "AKey.h"
 
 // Sets default values for this component's properties
 UAInventoryComponent::UAInventoryComponent()
@@ -25,7 +25,7 @@ void UAInventoryComponent::BeginPlay()
 }
 
 
-void UAInventoryComponent::SetInventory(TArray<AActor*> NewInventory)
+void UAInventoryComponent::SetInventory(TArray< AItemsBase*> NewInventory)
 {
 	Inventory = NewInventory;
 }
