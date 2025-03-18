@@ -61,11 +61,11 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	UFUNCTION(BlueprintCallable,Blueprintable)
+	UFUNCTION(BlueprintCallable,Blueprintable,category="Motion")
 	bool Open();
-	UFUNCTION(BlueprintCallable,Blueprintable)
+	UFUNCTION(BlueprintCallable,Blueprintable,category="Motion")
 	bool Close();
-	UFUNCTION(BlueprintCallable,Blueprintable)
+	UFUNCTION(BlueprintCallable,Blueprintable,category="Motion")
 	bool Unlock();
 	UFUNCTION(BlueprintCallable,Blueprintable)
 	bool IsLocked();

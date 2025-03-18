@@ -43,11 +43,13 @@ void AADoor::Tick(float DeltaTime)
 
 bool AADoor::Open()
 {
+	AddActorWorldRotation(FRotator(0, 90, 0));
 	return true;
 }
 
 bool AADoor::Close()
 {
+	AddActorWorldRotation(FRotator(0, 0, 0));
 	return false;
 }
 
