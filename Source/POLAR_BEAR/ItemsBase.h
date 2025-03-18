@@ -46,9 +46,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-UPROPERTY(BlueprintReadWrite)
+UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UStaticMeshComponent*ItemMesh;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UBoxComponent*CollisionBox;
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE FName getName() const {return ItemName;}

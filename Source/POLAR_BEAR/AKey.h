@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "ItemsBase.h"
+#include"IA_intractable.h"
 #include "AKey.generated.h"
 
 UENUM(BlueprintType)
@@ -13,9 +14,11 @@ enum class EKeyType : uint8
 	EKT_Master UMETA(DisplayName = "MASTER"),
 	EKT_Escape UMETA(DisplayName = "ESCAPE"),
 };
+
+class UBoxComponent;
 class USoundCue;
 UCLASS(Blueprintable,BlueprintType)
-class POLAR_BEAR_API AAKey : public AItemsBase
+class POLAR_BEAR_API AAKey : public AItemsBase,public IIA_intractable
 {
 	GENERATED_BODY()
 
@@ -34,8 +37,11 @@ public:
 	USoundCue* sound;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Key")
 	FString Code;
-	
 
+	
+    UFUNCTION(BlueprintCallable,Category="Key")
+	void Signal() override;
+	void RevCast() override;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

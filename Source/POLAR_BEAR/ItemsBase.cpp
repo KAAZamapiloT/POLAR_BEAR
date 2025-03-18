@@ -14,7 +14,7 @@ AItemsBase::AItemsBase()
 	PrimaryActorTick.bCanEverTick = true;
 	ItemMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Item Mesh"));
 	CollisionBox=CreateDefaultSubobject<UBoxComponent>(TEXT("BOX Collider"));
-
+    CollisionBox->SetupAttachment(ItemMesh);
 }
 
 // Called when the game starts or when spawned
