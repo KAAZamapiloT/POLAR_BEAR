@@ -31,7 +31,6 @@ protected:
 	USoundCue* SpotSound;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Spot")
 	UBoxComponent* SpotBox;
-	
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Spot")
 	bool bIsUnsafe;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Spot")

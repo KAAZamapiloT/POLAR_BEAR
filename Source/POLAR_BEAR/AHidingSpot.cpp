@@ -33,12 +33,14 @@ void AAHidingSpot::Tick(float DeltaTime)
 void AAHidingSpot::Hide()
 {
 	IIA_Hideable::Hide();
+	bIsActive=true;
 	UE_LOG(LogTemp, Display, TEXT("AAHidingSpot -> Hide"));
 }
 
 void AAHidingSpot::Unhide()
 {
 	IIA_Hideable::Unhide();
+	bIsActive=false;
 	UE_LOG(LogTemp, Display, TEXT("AAHidingSpot -> Unhide"));
 }
 

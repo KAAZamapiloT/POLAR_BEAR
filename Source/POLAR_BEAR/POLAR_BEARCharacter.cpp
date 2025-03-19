@@ -132,7 +132,29 @@ bool APOLAR_BEARCharacter::bCheckMasterString()
 	return KInventory->KeyNames.Contains("MasterKey");
 }
 
-void APOLAR_BEARCharacter::PlayMontage()
+void APOLAR_BEARCharacter::Hide()
+{
+	bIsHidden = true;
+	GetCharacterMovement()->DisableMovement();
+	GetMesh()->SetVisibility(false,true);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+void APOLAR_BEARCharacter::UnHide()
+{
+	bIsHidden = false;
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+	GetMesh()->SetVisibility(true,true);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController)
+	{
+		PlayerController->SetViewTargetWithBlend(this, 0.5f); 
+	}
+}
+
+void APOLAR_BEARCharacter::PlayMontage ()
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance&&AttackMontage)

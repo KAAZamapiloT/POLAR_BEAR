@@ -131,6 +131,10 @@ UPROPERTY(BlueprintReadWrite)
 	bool bCheckMasterString();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 	class UKeysInventory *KInventory;
+	UFUNCTION(BlueprintCallable, Category = "Hiding")
+	void Hide();
+	UFUNCTION(BlueprintCallable, Category = "Hiding")
+	void UnHide();
 };
 
 
