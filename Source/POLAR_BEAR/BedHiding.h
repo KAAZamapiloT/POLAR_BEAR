@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AHidingSpot.h"
 #include "BedHiding.generated.h"
-
+class UCameraComponent;
 UCLASS()
 class POLAR_BEAR_API ABedHiding : public AAHidingSpot
 {
@@ -22,4 +22,6 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Components")
+	UCameraComponent* CameraComp;
 };

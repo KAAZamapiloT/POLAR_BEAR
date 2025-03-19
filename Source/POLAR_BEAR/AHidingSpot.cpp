@@ -3,6 +3,7 @@
 
 #include "AHidingSpot.h"
 
+#include "POLAR_BEARCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -15,6 +16,10 @@ AAHidingSpot::AAHidingSpot()
 	SpotBox->SetupAttachment(GetRootComponent());
 	SpotMesh=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpotMesh"));
 	SpotMesh->SetupAttachment(SpotBox);
+	SpotBox->SetGenerateOverlapEvents(true);
+	SpotBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	SpotBox->SetCollisionObjectType(ECollisionChannel::ECC_WorldStatic);
+	SpotBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 }
 
 // Called when the game starts or when spawned
@@ -48,5 +53,34 @@ void AAHidingSpot::Signal()
 {
 	IIA_intractable::Signal();
 	UE_LOG(LogTemp, Display, TEXT("AAHidingSpot -> signal"));
+}
+
+void AAHidingSpot::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+
+	if (OtherActor&&OtherActor!=this)
+	{
+		APOLAR_BEARCharacter*MyCharacter=Cast<APOLAR_BEARCharacter>(OtherActor);
+		if (MyCharacter)
+		{
+			// would like to call a function that toggles state between hide and unhide
+			UE_LOG(LogTemp, Display, TEXT("AAHidingSpot::OnOverlapBegin"));
+		}
+	}
+}
+
+void AAHidingSpot::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex)
+{
+	if (OtherActor&&OtherActor!=this)
+	{
+		APOLAR_BEARCharacter*MyCharacter=Cast<APOLAR_BEARCharacter>(OtherActor);
+		if (MyCharacter)
+		{
+			//  would like build a functionality after end overlap
+			UE_LOG(LogTemp, Display, TEXT("AAHidingSpot::OnOverlapEnd"));
+		}
+	}
 }
 

@@ -25,8 +25,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Spot")
-	UStaticMeshComponent* SpotMesh;
+    
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Spot")
 	USoundCue* SpotSound;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Spot")
@@ -50,4 +49,19 @@ public:
 	void Unhide() override;
 	UFUNCTION(BlueprintCallable)
 	void Signal() override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Spot")
+	UStaticMeshComponent* SpotMesh;
+	// In your character or actor header (.h) file
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
+						AActor* OtherActor, 
+						UPrimitiveComponent* OtherComp, 
+						int32 OtherBodyIndex, 
+						bool bFromSweep, 
+						const FHitResult & SweepResult);
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, 
+					  AActor* OtherActor, 
+					  UPrimitiveComponent* OtherComp, 
+					  int32 OtherBodyIndex);
 };

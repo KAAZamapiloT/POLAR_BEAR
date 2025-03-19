@@ -8,6 +8,7 @@
 #include "Logging/LogMacros.h"
 #include "IA_Damageable.h"
 #include "KeysInventory.h"
+#include "Elements/Common/TypedElementCommonTypes.h"
 
 #include "POLAR_BEARCharacter.generated.h"
 
@@ -66,6 +67,8 @@ class APOLAR_BEARCharacter : public ACharacter,public IIA_Damageable
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* Intraction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* HidesAction;
 public:
 	APOLAR_BEARCharacter();
 	
@@ -135,6 +138,8 @@ UPROPERTY(BlueprintReadWrite)
 	void Hide();
 	UFUNCTION(BlueprintCallable, Category = "Hiding")
 	void UnHide();
+	UFUNCTION(Blueprintable,BlueprintCallable ,Category = "Hiding")
+	void ToggleHideState();
 };
 
 

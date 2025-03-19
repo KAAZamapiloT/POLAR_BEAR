@@ -74,7 +74,7 @@ APOLAR_BEARCharacter::APOLAR_BEARCharacter()
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	KInventory=CreateDefaultSubobject<UKeysInventory>(TEXT("KInventory"));
-	
+	Tags.Add(TEXT("PolarBear"));
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
@@ -114,7 +114,8 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &APOLAR_BEARCharacter::Sprint);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::StopSprint);
         EnhancedInputComponent->BindAction(WeakAttackAction,ETriggerEvent::Started,this,&APOLAR_BEARCharacter::Attack);
-		EnhancedInputComponent->BindAction(Intraction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::Intract);
+		EnhancedInputComponent->BindAction(Intraction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::Intract); 
+		EnhancedInputComponent->BindAction(HidesAction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::HideAction);
 	}
 	else
 	{
@@ -152,6 +153,19 @@ void APOLAR_BEARCharacter::UnHide()
 	{
 		PlayerController->SetViewTargetWithBlend(this, 0.5f); 
 	}
+}
+
+void APOLAR_BEARCharacter::ToggleHideState()
+{
+	if (bIsHidden)
+	{
+		UnHide();
+		
+	}else
+	{
+		Hide();
+	}
+
 }
 
 void APOLAR_BEARCharacter::PlayMontage ()
@@ -306,6 +320,7 @@ void APOLAR_BEARCharacter::HideAction()
 						Intractable->Hide();
 						
 					}
+					ToggleHideState();
 					bIsHidden = !bIsHidden;
 					
 					UE_LOG(LogTemp, Error, TEXT("Signal Is Called: %s"), *HitActor->GetName());
