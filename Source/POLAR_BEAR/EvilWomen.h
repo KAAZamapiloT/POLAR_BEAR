@@ -37,6 +37,7 @@ protected:
 	TArray<UAnimMontage*>Montages;
     EactionState AttackState=EactionState::EAS_NotAttacking;
 	void PlayMontages();
+	
     UFUNCTION(BlueprintCallable)
 	void AttackEnd()
 	{
@@ -44,6 +45,8 @@ protected:
 	}
    UFUNCTION(BlueprintCallable)
 	void AttackTrace();
+	UFUNCTION(BlueprintCallable,Blueprintable,Category="AI")
+	void Intract();
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -52,9 +55,22 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
 	UAISenseConfig_Sight* SightConfig;
+
+	// SOMETHINGS RELATED TO PUZZLE SYSTEM
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	TSubclassOf<UAIPerceptionComponent> PerceptionComponentClass;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	TSubclassOf<UAISenseConfig_Sight> SightConfigClass;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	bool bCanOpenDoor=false;
+	UFUNCTION(BlueprintCallable,Blueprintable, Category="AI")
+	void OpenDoor();
 	UFUNCTION(BlueprintCallable)
 	void Attack();
 };
+
+
+
 
 inline void AEvilWomen::Attack()
 {

@@ -6,7 +6,7 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 #include "Perception/PawnSensingComponent.h"
-
+#include"IA_intractable.h"
 
 // Sets default values
 AEvilWomen::AEvilWomen()
@@ -79,6 +79,47 @@ void AEvilWomen::AttackTrace()
 	
 }
 
+void AEvilWomen::Intract()
+{
+	FVector StartLocation=GetActorLocation();
+	
+	FVector EndLocation=StartLocation+100*GetActorForwardVector();
+	FHitResult rHit;
+	TArray<FHitResult> HitResults;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+	bool bHit = GetWorld()->LineTraceMultiByChannel(HitResults, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+	DrawDebugLine(GetWorld(),StartLocation,EndLocation,FColor::Green,false,1,0,5);
+	if(ActorLineTraceSingle(rHit, StartLocation, EndLocation, ECC_WorldStatic, CollisionParams))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, FString::Printf(TEXT("The Component Being Hit is: %s"), *rHit.GetComponent()->GetName()));
+	}
+	if (bHit)
+	{
+		for (auto& Hit : HitResults)
+		{
+			AActor* HitActor = Hit.GetActor();
+			if (Hit.GetActor())  
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
+			}
+			if (HitActor->Implements<UIA_intractable>())
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Hit Actor Implemets interface: %s"), *Hit.GetActor()->GetName());
+				
+				IIA_intractable* Intractable = Cast<IIA_intractable>(HitActor);
+				if (Intractable)
+				{
+					Intractable->Signal();  
+					UE_LOG(LogTemp, Error, TEXT("Signal Is Called: %s"), *HitActor->GetName());
+				}
+			}
+			// Draw debug sphere at each hit location
+			DrawDebugSphere(GetWorld(), Hit.ImpactPoint, 10.0f, 12, FColor::Green, false, 2.0f);
+		}
+	}
+}
+
 // Called every frame
 void AEvilWomen::Tick(float DeltaTime)
 {
@@ -90,4 +131,9 @@ void AEvilWomen::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
-
+void AEvilWomen::OpenDoor()
+{
+	PlayMontages();
+	Intract();
+	
+}
