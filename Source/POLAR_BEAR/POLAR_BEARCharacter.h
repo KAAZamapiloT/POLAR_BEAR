@@ -120,7 +120,7 @@ public:
 	bool bInAir=false;
 UPROPERTY(BlueprintReadWrite)
 	bool bIsIntracting=false;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category="Hiding")
 	bool bIsHidden=false;
     void JustDie();
     void Damage(float DamageAmount) override;
