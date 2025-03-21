@@ -51,6 +51,8 @@ public:
 	void Signal() override;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Spot")
 	UStaticMeshComponent* SpotMesh;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Spot")
+	ACharacter* SpotCharacter;
 	// In your character or actor header (.h) file
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
@@ -64,4 +66,6 @@ public:
 					  AActor* OtherActor, 
 					  UPrimitiveComponent* OtherComp, 
 					  int32 OtherBodyIndex);
+	UFUNCTION()
+	void RevCast() override;
 };

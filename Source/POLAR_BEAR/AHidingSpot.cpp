@@ -6,6 +6,7 @@
 #include "POLAR_BEARCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/OverlapResult.h"
 
 // Sets default values
 AAHidingSpot::AAHidingSpot()
@@ -82,5 +83,61 @@ void AAHidingSpot::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* Oth
 			UE_LOG(LogTemp, Display, TEXT("AAHidingSpot::OnOverlapEnd"));
 		}
 	}
+}
+
+void AAHidingSpot::RevCast()
+{
+	
+	IIA_intractable::RevCast();
+	FVector SphereCenter = GetActorLocation();
+	float SphereRadius = 500.f;
+
+	// Array to store overlapping actors
+	TArray<FOverlapResult> Overlaps;
+
+	// Collision query params
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this); // Ignore self
+
+	// Collision object types - here focusing on Pawns (Characters)
+	FCollisionObjectQueryParams ObjectQueryParams;
+	ObjectQueryParams.AddObjectTypesToQuery(ECC_Pawn);
+
+	bool bHit = GetWorld()->OverlapMultiByObjectType(
+		Overlaps,
+		SphereCenter,
+		FQuat::Identity,
+		ObjectQueryParams,
+		FCollisionShape::MakeSphere(SphereRadius),
+		Params
+	);
+
+	// Debug Sphere
+	DrawDebugSphere(GetWorld(), SphereCenter, SphereRadius, 16, FColor::Cyan, false, 2.0f);
+	UE_LOG(LogTemp,Display,TEXT("AAKey::RevCast"));
+
+	if(bHit)
+	{
+		for (auto& Overlap : Overlaps)
+		{
+		
+             AActor*OverlappedActor=Overlap.GetActor();
+
+
+			if(OverlappedActor)
+			{
+                
+				APOLAR_BEARCharacter*MyCharacter=Cast<APOLAR_BEARCharacter>(OverlappedActor);
+				SpotCharacter=MyCharacter;
+				if(MyCharacter)
+				{
+				
+					//HERE WE WILL MOSTLY TOGGLE BETWEEN STATES OF PLAYER
+					UE_LOG(LogTemp,Warning,TEXT("HITTED CHARACTERT POLAR BEAR "));
+				}
+			}
+		}
+	}
+
 }
 

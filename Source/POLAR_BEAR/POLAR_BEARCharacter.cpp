@@ -115,7 +115,7 @@ void APOLAR_BEARCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &APOLAR_BEARCharacter::StopSprint);
         EnhancedInputComponent->BindAction(WeakAttackAction,ETriggerEvent::Started,this,&APOLAR_BEARCharacter::Attack);
 		EnhancedInputComponent->BindAction(Intraction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::Intract); 
-		EnhancedInputComponent->BindAction(HidesAction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::HideAction);
+	//	EnhancedInputComponent->BindAction(HidesAction,ETriggerEvent::Completed,this,&APOLAR_BEARCharacter::HideAction);
 	}
 	else
 	{
