@@ -5,6 +5,7 @@
 #include "ADoor.h"
 #include "AInventoryComponent.h"
 #include "Engine/LocalPlayer.h"
+#include "Kismet/GameplayStatics.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -194,6 +195,11 @@ void APOLAR_BEARCharacter::JustDie()
 void APOLAR_BEARCharacter::Damage(float DamageAmount)
 {
 	IIA_Damageable::Damage(DamageAmount);
+	// AS SOON AS PLAYER GETS HIT A SOUND WILL PLAY AT LOCATION
+	if (HitSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+	}
 	JustDie();
 }
 

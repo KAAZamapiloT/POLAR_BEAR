@@ -18,6 +18,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class UAnimMontage;
+class USoundBase;
 class UAInventoryComponent;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -71,8 +72,8 @@ class APOLAR_BEARCharacter : public ACharacter,public IIA_Damageable
 	//UInputAction* HidesAction;
 public:
 	APOLAR_BEARCharacter();
-	
-
+UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio")	
+USoundBase*HitSound;
 protected:
 /*
  *   CALLBACKS TO INPUT
