@@ -10,14 +10,28 @@
 
 UEvilWomen_TaskFindPlayer::UEvilWomen_TaskFindPlayer()
 {
-	NodeName = "Attack Player";
-	AttackCooldown = 1.0f;       
-	LastAttackTime = -AttackCooldown;
+	NodeName = "FindPlayer";
+	
 }
 
 EBTNodeResult::Type UEvilWomen_TaskFindPlayer::ExecuteTask(UBehaviorTreeComponent& Comp, uint8* NodeMemory)
 {
-
+	AAIController* AIController = Comp.GetAIOwner();
+	APawn* Pawn = AIController->GetPawn();
+	
+	UBlackboardComponent* BlackboardComp = AIController->GetBlackboardComponent();
+	AActor* Target = Cast<AActor>(BlackboardComp->GetValueAsObject("Target"));
+	if (!AIController||!BlackboardComp)
+	{
+		UE_LOG(LogTemp,Error,TEXT("WHERE IS AI CONTROLLER AND BLACKBOARD"))
+	}
+	if (Target)
+	{
+		AIController->MoveToActor(Target, 100.0f);
+		UE_LOG(LogTemp, Warning, TEXT("%s is target found"), *Target->GetName());
+		return EBTNodeResult::Succeeded;
+		
+	}
     return EBTNodeResult::Failed;
 }
 

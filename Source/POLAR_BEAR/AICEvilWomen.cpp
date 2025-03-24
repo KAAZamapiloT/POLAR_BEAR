@@ -5,6 +5,7 @@
 
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Perception/AIPerceptionComponent.h"
 
 
 // Sets default values
@@ -14,6 +15,18 @@ AAICEvilWomen::AAICEvilWomen()
 	PrimaryActorTick.bCanEverTick = true;
 	BlackboardComponent=CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackBoard Component"));
 	BehaviorTreeComponent=CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("Behavior Tree Component"));
+	AIPerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component"));
+	SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
+    
+	SightConfig->SightRadius = 500.0f;
+	SightConfig->LoseSightRadius = 600.0f;
+	SightConfig->PeripheralVisionAngleDegrees = 60.0f;
+	SightConfig->DetectionByAffiliation.bDetectEnemies = true;
+	SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
+	SightConfig->DetectionByAffiliation.bDetectNeutrals = true;
+	SightConfig->SetMaxAge(4.0f);
+	AIPerceptionComponent->ConfigureSense(*SightConfig);
+	AIPerceptionComponent->SetDominantSense(SightConfig->GetSenseImplementation());
 }
 
 // Called when the game starts or when spawned

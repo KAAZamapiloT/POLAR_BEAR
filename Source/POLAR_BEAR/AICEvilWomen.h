@@ -3,13 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AIController.h"
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISenseConfig_Sight.h"
+#include "BehaviorTree/BehaviorTreeComponent.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "IA_Damageable.h"
 
 #include "AICEvilWomen.generated.h"
 
-
-
+class UAISenseConfig;
+class UAIPerceptionComponent;
 class UBehaviorTreeComponent;
 
 UCLASS()
@@ -35,5 +40,9 @@ private:
 	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
 	UPROPERTY(EditInstanceOnly,BlueprintReadOnly,Category="AI",meta=(AllowPrivateAccess=true))
 	TObjectPtr<UBehaviorTree> BehaviorTree;
-	
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI")
+	TObjectPtr<UAIPerceptionComponent> AIPerceptionComponent;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI")
+	TObjectPtr<UAISenseConfig_Sight> SightConfig;
 };

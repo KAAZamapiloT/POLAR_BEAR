@@ -23,9 +23,6 @@ public:
 
 private:
 	
-	UPROPERTY(EditAnywhere, Category = "Attack")
-	float AttackCooldown;
-	
-	float LastAttackTime;
+
 	
 };
