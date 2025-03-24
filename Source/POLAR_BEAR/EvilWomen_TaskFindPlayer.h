@@ -15,9 +15,17 @@ class POLAR_BEAR_API UEvilWomen_TaskFindPlayer : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 public:
-	
+	UEvilWomen_TaskFindPlayer();
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& Comp, uint8* NodeMemory) override;
 
 	UFUNCTION(BlueprintCallable)
 	void FindPlayer();
+
+private:
+	
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	float AttackCooldown;
+	
+	float LastAttackTime;
 	
 };

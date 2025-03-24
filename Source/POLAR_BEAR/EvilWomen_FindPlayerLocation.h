@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
-#include "EvilWomen_FindPlyerLocation.generated.h"
+#include "EvilWomen_FindPlayerLocation.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class POLAR_BEAR_API UEvilWomen_FindPlyerLocation : public UBTTask_BlackboardBase
+class POLAR_BEAR_API UEvilWomen_FindPlayerLocation : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 
 
-	explicit UEvilWomen_FindPlyerLocation(const FObjectInitializer& ObjectInitializer);
+	explicit UEvilWomen_FindPlayerLocation(const FObjectInitializer& ObjectInitializer);
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };
