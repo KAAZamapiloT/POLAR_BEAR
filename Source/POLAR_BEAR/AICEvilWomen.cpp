@@ -27,6 +27,7 @@ AAICEvilWomen::AAICEvilWomen()
 	SightConfig->SetMaxAge(4.0f);
 	AIPerceptionComponent->ConfigureSense(*SightConfig);
 	AIPerceptionComponent->SetDominantSense(SightConfig->GetSenseImplementation());
+
 }
 
 // Called when the game starts or when spawned
@@ -49,6 +50,7 @@ void AAICEvilWomen::OnPossess(APawn* InPawn)
 	{
 		BlackboardComponent->InitializeBlackboard(*BehaviorTree.Get()->BlackboardAsset.Get());
 	}
+	RunBehaviorTree(BehaviorTree);
 }
 
 // Called every frame

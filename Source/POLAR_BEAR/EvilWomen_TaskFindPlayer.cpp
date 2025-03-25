@@ -24,6 +24,7 @@ EBTNodeResult::Type UEvilWomen_TaskFindPlayer::ExecuteTask(UBehaviorTreeComponen
 	if (!AIController||!BlackboardComp)
 	{
 		UE_LOG(LogTemp,Error,TEXT("WHERE IS AI CONTROLLER AND BLACKBOARD"))
+		return EBTNodeResult::Failed;
 	}
 	if (Target)
 	{

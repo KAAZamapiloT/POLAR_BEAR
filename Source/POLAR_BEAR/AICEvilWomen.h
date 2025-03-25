@@ -10,6 +10,9 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "IA_Damageable.h"
+#include "Perception/AISense_Sight.h"
+#include "Perception/AISense_Hearing.h"
+#include "Perception/AISense.h"
 
 #include "AICEvilWomen.generated.h"
 
@@ -45,4 +48,36 @@ public:
 	TObjectPtr<UAIPerceptionComponent> AIPerceptionComponent;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI")
 	TObjectPtr<UAISenseConfig_Sight> SightConfig;
+
+	void OnTargetDetected(AActor* InTarget,FAIStimulus Stimulus);
 };
+
+inline void AAICEvilWomen::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
+{
+	FString Sense;
+
+	// Compare with known Sense IDs
+	if (Stimulus.Type == UAISense_Sight::StaticClass()->GetDefaultObject<UAISense>()->GetSenseID())
+	{
+		Sense = "Sight";
+	}
+	else if (Stimulus.Type == UAISense_Hearing::StaticClass()->GetDefaultObject<UAISense>()->GetSenseID())
+	{
+		Sense = "Hearing";
+	}
+	else
+	{
+		Sense = "Unknown Sense";
+	}
+
+	if (Stimulus.WasSuccessfullySensed())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Detected %s using %s"), *Actor->GetName(), *Sense);
+		BlackboardComponent->SetValueAsObject("Target", Actor);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Lost %s with %s"), *Actor->GetName(), *Sense);
+		BlackboardComponent->ClearValue("Target");
+	}
+}
