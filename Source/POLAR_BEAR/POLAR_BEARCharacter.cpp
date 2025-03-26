@@ -35,6 +35,9 @@
 #include "Animation/AnimMontage.h"
 #include"IA_Hideable.h"
 #include "KeysInventory.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISenseConfig.h"
+#include "Perception/AISense_Sight.h"
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
@@ -183,6 +186,19 @@ void APOLAR_BEARCharacter::PlayMontage ()
 void APOLAR_BEARCharacter::AttackEnd()
 {
 	AttackState=EState::EAS_NotAttacking;
+}
+
+void APOLAR_BEARCharacter::SetupStimulusSource()
+{
+
+	StimulusSource=CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("StimulusSource"));
+	if (StimulusSource)
+	{
+		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+		StimulusSource->RegisterWithPerceptionSystem();
+
+		
+	}
 }
 
 void APOLAR_BEARCharacter::JustDie()

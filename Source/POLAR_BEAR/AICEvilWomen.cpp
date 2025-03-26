@@ -3,6 +3,7 @@
 
 #include "AICEvilWomen.h"
 
+#include "POLAR_BEARCharacter.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
@@ -15,19 +16,10 @@ AAICEvilWomen::AAICEvilWomen()
 	PrimaryActorTick.bCanEverTick = true;
 	BlackboardComponent=CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackBoard Component"));
 	BehaviorTreeComponent=CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("Behavior Tree Component"));
-	AIPerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component"));
-	SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
-    
-	SightConfig->SightRadius = 500.0f;
-	SightConfig->LoseSightRadius = 600.0f;
-	SightConfig->PeripheralVisionAngleDegrees = 60.0f;
-	SightConfig->DetectionByAffiliation.bDetectEnemies = true;
-	SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
-	SightConfig->DetectionByAffiliation.bDetectNeutrals = true;
-	SightConfig->SetMaxAge(4.0f);
-	AIPerceptionComponent->ConfigureSense(*SightConfig);
-	AIPerceptionComponent->SetDominantSense(SightConfig->GetSenseImplementation());
-
+	//AIPerceptionComponent=CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component"));
+	//SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
+SetupPerceptionSystem();
+	
 }
 
 // Called when the game starts or when spawned
@@ -57,5 +49,42 @@ void AAICEvilWomen::OnPossess(APawn* InPawn)
 void AAICEvilWomen::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void AAICEvilWomen::SetupPerceptionSystem()
+{
+SightConfig=CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
+
+	if (SightConfig)
+	{
+		SetPerceptionComponent(*CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component")));
+
+
+		SightConfig->SightRadius = 500.0f;
+		SightConfig->LoseSightRadius = SightConfig->SightRadius+25.f;
+		SightConfig->PeripheralVisionAngleDegrees = 60.0f;
+		SightConfig->SetMaxAge(5.f);
+		SightConfig->AutoSuccessRangeFromLastSeenLocation=550.f;
+		SightConfig->DetectionByAffiliation.bDetectEnemies = true;
+		SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
+		SightConfig->DetectionByAffiliation.bDetectNeutrals = true;
+
+        GetPerceptionComponent()->SetDominantSense(*SightConfig->GetSenseImplementation());
+		GetPerceptionComponent()->OnTargetPerceptionUpdated.AddDynamic(this,&AAICEvilWomen::AAICEvilWomen::OnTargetDetected);
+
+		GetPerceptionComponent()->ConfigureSense(*SightConfig);
+		
+	}
+	
+}
+
+void AAICEvilWomen::OnTargetDetected(AActor* InTarget, FAIStimulus Stimulus)
+{
+
+	if (auto*const ch=Cast<APOLAR_BEARCharacter>(InTarget))
+	{
+	BlackboardComponent->SetValueAsBool("IsSeeingPlayer",Stimulus.WasSuccessfullySensed());
+		
+	}
 }
 

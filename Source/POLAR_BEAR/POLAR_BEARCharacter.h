@@ -12,6 +12,7 @@
 
 #include "POLAR_BEARCharacter.generated.h"
 
+class UAIPerceptionStimuliSourceComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -119,6 +120,13 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+// AI WORKS
+	UAIPerceptionStimuliSourceComponent*StimulusSource;
+
+    void SetupStimulusSource();
+
+
 	
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAir=false;

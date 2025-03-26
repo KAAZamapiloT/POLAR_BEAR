@@ -44,40 +44,15 @@ private:
 	UPROPERTY(EditInstanceOnly,BlueprintReadOnly,Category="AI",meta=(AllowPrivateAccess=true))
 	TObjectPtr<UBehaviorTree> BehaviorTree;
 public:
-	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI")
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI_Perception")
 	TObjectPtr<UAIPerceptionComponent> AIPerceptionComponent;
-	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI")
-	TObjectPtr<UAISenseConfig_Sight> SightConfig;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI_Perception")
+	class UAISenseConfig_Sight* SightConfig;
 
+	UFUNCTION(BlueprintCallable,Category="AI_Perception")
+	void SetupPerceptionSystem();
+	UFUNCTION(BlueprintCallable,Blueprintable,Category="AI_Perception")
 	void OnTargetDetected(AActor* InTarget,FAIStimulus Stimulus);
 };
 
-inline void AAICEvilWomen::OnTargetDetected(AActor* Actor, FAIStimulus Stimulus)
-{
-	FString Sense;
 
-	// Compare with known Sense IDs
-	if (Stimulus.Type == UAISense_Sight::StaticClass()->GetDefaultObject<UAISense>()->GetSenseID())
-	{
-		Sense = "Sight";
-	}
-	else if (Stimulus.Type == UAISense_Hearing::StaticClass()->GetDefaultObject<UAISense>()->GetSenseID())
-	{
-		Sense = "Hearing";
-	}
-	else
-	{
-		Sense = "Unknown Sense";
-	}
-
-	if (Stimulus.WasSuccessfullySensed())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Detected %s using %s"), *Actor->GetName(), *Sense);
-		BlackboardComponent->SetValueAsObject("Target", Actor);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Lost %s with %s"), *Actor->GetName(), *Sense);
-		BlackboardComponent->ClearValue("Target");
-	}
-}
