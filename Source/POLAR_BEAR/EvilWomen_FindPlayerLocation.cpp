@@ -11,7 +11,7 @@
 
 UEvilWomen_FindPlayerLocation::UEvilWomen_FindPlayerLocation(const FObjectInitializer& ObjectInitializer)
 {
-	NodeName = "EvilWomwn_FindPlyerLocation";
+	NodeName = "EvilWomen_FindPlyerLocation";
 }
 
 EBTNodeResult::Type UEvilWomen_FindPlayerLocation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -34,26 +34,26 @@ EBTNodeResult::Type UEvilWomen_FindPlayerLocation::ExecuteTask(UBehaviorTreeComp
 					OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),Location.Location);
 				}
 			}
-			///
-			OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),PlayerLocation);
-			AAIController* AIController = OwnerComp.GetAIOwner();
-			if (AIController)
-			{
-				AIController->MoveToLocation(PlayerLocation);
-			}
-			//
+			//	OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),PlayerLocation);
+			//AAIController* AIController = OwnerComp.GetAIOwner();
+			//if (AIController)
+			//{
+			//	AIController->MoveToLocation(PlayerLocation);
+			//}**//
+			
+		
 			FinishLatentTask(OwnerComp,EBTNodeResult::Succeeded);
 			return EBTNodeResult::Succeeded;
 		}else{
 			OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),PlayerLocation);
 			///
-			OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),PlayerLocation);
+			/*OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(),PlayerLocation);
 			AAIController* AIController = OwnerComp.GetAIOwner();
 			if (AIController)
 			{
 				AIController->MoveToLocation(PlayerLocation);
 			}
-			//
+			*/
 			FinishLatentTask(OwnerComp,EBTNodeResult::Succeeded);
 			return EBTNodeResult::Succeeded;
 		}
