@@ -14,7 +14,12 @@ class POLAR_BEAR_API UEvilWomen_FindPlayerLocation : public UBTTask_BlackboardBa
 {
 	GENERATED_BODY()
 
-
+public:
 	explicit UEvilWomen_FindPlayerLocation(const FObjectInitializer& ObjectInitializer);
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Behavior")
+	float SearchRadius=200.f;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Behavior")
+	bool bSearchRandom=false;
+	
 };

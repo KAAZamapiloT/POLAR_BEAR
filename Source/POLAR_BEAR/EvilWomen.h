@@ -56,6 +56,22 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
 	UAISenseConfig_Sight* SightConfig;
 
+	// EVIL WOMEN CONTROLLER
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	class AAICEvilWomen* EvilWomenController;
+    /*
+     *
+     * NAVIGATION COMPONENTSS
+     */
+
+	
+	//CURRENT PATROL TARGET	
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI_Navigation")
+	AActor*PatrolTarget;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	TArray<AActor*> PatrolActors;
+	
+	
 	// SOMETHINGS RELATED TO PUZZLE SYSTEM
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
 	TSubclassOf<UAIPerceptionComponent> PerceptionComponentClass;
@@ -67,6 +83,8 @@ public:
 	void OpenDoor();
 	UFUNCTION(BlueprintCallable)
 	void Attack();
+	UFUNCTION(BlueprintCallable,Category="AI_Navigation")
+	void CustomPatrol();
 };
 
 
