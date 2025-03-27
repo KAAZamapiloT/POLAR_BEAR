@@ -18,6 +18,15 @@ enum class EactionState:uint8
 	EAS_NotAttacking UMETA(DisplayName = "Not Attacking"),
 };
 
+
+USTRUCT(BlueprintType)
+struct FPatrolRoute
+{
+	GENERATED_BODY();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Patrol")
+	TArray<AActor*> PatrolPoints;
+};
 UCLASS()
 class POLAR_BEAR_API AEvilWomen : public ACharacter ,public IIA_Damageable
 {
@@ -76,7 +85,16 @@ public:
 	AActor*PatrolTarget;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
 	TArray<AActor*> PatrolActors;
-	
+
+    //ADVANCED PATROLLING (OPTIONAL MAY NOT BE IN FINAL)
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
+	TArray<AActor*> CurrentPatrolArray;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
+	TArray<FPatrolRoute> PatrolArray;
+
+	UFUNCTION(BlueprintCallable,Blueprintable,Category="AI")
+	FPatrolRoute GetClosestPatrolRoute(AActor*PlayerActor)const;
 	
 	// SOMETHINGS RELATED TO PUZZLE SYSTEM
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")

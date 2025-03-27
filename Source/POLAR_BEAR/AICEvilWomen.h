@@ -20,6 +20,22 @@ class UAISenseConfig;
 class UAIPerceptionComponent;
 class UBehaviorTreeComponent;
 
+//ENUMRATION FOR STATES IMPLEMETATION
+UENUM(BlueprintType)
+enum class EAICEvilWomen : uint8
+{
+	Idle        UMETA(DisplayName = "Idle"),
+	Patrolling  UMETA(DisplayName = "Patrolling"),
+	Alert       UMETA(DisplayName = "Alert"),
+	Chasing     UMETA(DisplayName = "Chasing"),
+	Attacking   UMETA(DisplayName = "Attacking")
+};
+
+
+
+
+
+
 UCLASS()
 class POLAR_BEAR_API AAICEvilWomen : public AAIController
 {

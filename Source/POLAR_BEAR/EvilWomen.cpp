@@ -146,6 +146,41 @@ APatrolPath* AEvilWomen::GetPatrolPath() const
 	return PatrolPath;
 }
 
+FPatrolRoute AEvilWomen::GetClosestPatrolRoute(AActor*PlayerActor) const
+{
+	FPatrolRoute BestRoute;
+	float ClosestDistance = TNumericLimits<float>::Max();
+
+	if (!PlayerActor)
+	{
+		return BestRoute;
+	}
+
+	const FVector PlayerLocation = PlayerActor->GetActorLocation();
+
+	// Iterate over each patrol route
+	for (const FPatrolRoute& Route : PatrolArray)
+	{
+		// Ensure there is at least one patrol point
+		if (Route.PatrolPoints.Num() > 0)
+		{
+			// Use the first patrol point as the reference
+			FVector PatrolLocation = Route.PatrolPoints[0]->GetActorLocation();
+			float Distance = FVector::Dist(PlayerLocation, PatrolLocation);
+
+			// Alternatively, you could compute the average location of all patrol points here
+
+			if (Distance < ClosestDistance)
+			{
+				ClosestDistance = Distance;
+				BestRoute = Route;
+			}
+		}
+	}
+
+	return BestRoute;
+}
+
 void AEvilWomen::OpenDoor()
 {
 	PlayMontages();
