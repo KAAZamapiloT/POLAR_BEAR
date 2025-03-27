@@ -50,7 +50,8 @@ EBTNodeResult::Type UEvilWomen_TaskFindPatrolPoint::ExecuteTask(UBehaviorTreeCom
 	return EBTNodeResult::Failed;
 }
 
-UEvilWomen_TaskFindPatrolPoint::UEvilWomen_TaskFindPatrolPoint(FObjectInitializer const& ObjectInitializer)
+UEvilWomen_TaskFindPatrolPoint::UEvilWomen_TaskFindPatrolPoint(FObjectInitializer const& ObjectInitializer):
+UBTTask_BlackboardBase{ObjectInitializer}
 {
 
 	NodeName = "EvilWomen_TaskFindPatrolPoint";

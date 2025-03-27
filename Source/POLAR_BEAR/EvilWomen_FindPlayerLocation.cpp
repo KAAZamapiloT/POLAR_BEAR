@@ -9,7 +9,8 @@
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
-UEvilWomen_FindPlayerLocation::UEvilWomen_FindPlayerLocation(const FObjectInitializer& ObjectInitializer)
+UEvilWomen_FindPlayerLocation::UEvilWomen_FindPlayerLocation(const FObjectInitializer& ObjectInitializer):
+UBTTask_BlackboardBase{ObjectInitializer}
 {
 	NodeName = "EvilWomen_FindPlyerLocation";
 }

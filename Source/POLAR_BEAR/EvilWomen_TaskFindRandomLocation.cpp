@@ -28,7 +28,7 @@ const APawn*AiPawn=AiController->GetPawn();
 	//GRABBING THE NAVIGATION SYSTEM
 	const UNavigationSystemV1*NavSystem{UNavigationSystemV1::GetCurrent(GetWorld())};
 
-
+//FINDING RANDOM POINT 
 	if (NavSystem&&NavSystem->GetRandomPointInNavigableRadius(Origin,fSearchRadius,Location))
 	{
 		AiController->GetBlackboardComponent()->SetValueAsVector(BlackboardKey.SelectedKeyName,Location.Location);
