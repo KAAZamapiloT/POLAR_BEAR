@@ -43,6 +43,7 @@ private:
 	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
 	UPROPERTY(EditInstanceOnly,BlueprintReadOnly,Category="AI",meta=(AllowPrivateAccess=true))
 	TObjectPtr<UBehaviorTree> BehaviorTree;
+
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI_Perception")
 	TObjectPtr<UAIPerceptionComponent> AIPerceptionComponent;

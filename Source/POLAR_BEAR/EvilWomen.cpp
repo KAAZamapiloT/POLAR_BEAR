@@ -140,6 +140,12 @@ void AEvilWomen::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+
+APatrolPath* AEvilWomen::GetPatrolPath() const
+{
+	return PatrolPath;
+}
+
 void AEvilWomen::OpenDoor()
 {
 	PlayMontages();

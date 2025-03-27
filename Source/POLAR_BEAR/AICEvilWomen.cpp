@@ -7,7 +7,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
-
+#include  "PatrolPath.h"
 
 // Sets default values
 AAICEvilWomen::AAICEvilWomen()

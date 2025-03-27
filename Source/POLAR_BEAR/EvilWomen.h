@@ -65,6 +65,12 @@ public:
      */
 
 	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
+	class APatrolPath* PatrolPath;
+
+
+	UFUNCTION(BlueprintCallable,category="AI")
+	APatrolPath* GetPatrolPath()const ;
 	//CURRENT PATROL TARGET	
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI_Navigation")
 	AActor*PatrolTarget;
