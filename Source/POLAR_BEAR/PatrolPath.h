@@ -18,7 +18,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+// PATROL PATH CONTAINS ARRAY OF POINTS WHICH CAN BE PLACED IN WORLD AND USED AS PATROL POINTS
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

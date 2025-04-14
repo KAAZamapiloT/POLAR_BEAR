@@ -21,5 +21,8 @@ public:
 	float SearchRadius=200.f;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Behavior")
 	bool bSearchRandom=false;
-	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Behavior")
+	class AActor*AttackedActor;
+
+	//FVector Location=AttackedActor->GetActorLocation();
 };

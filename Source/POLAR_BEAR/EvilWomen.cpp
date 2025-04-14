@@ -3,19 +3,19 @@
 
 #include "EvilWomen.h"
 
-#include "Perception/AIPerceptionComponent.h"
-#include "Perception/AISenseConfig_Sight.h"
+//#include "Perception/AIPerceptionComponent.h"
+//#include "Perception/AISenseConfig_Sight.h"
 #include"AICEvilWomen.h"
-#include "NavigationSystem.h"
-#include "NavigationPath.h"
-#include "Navigation/PathFollowingComponent.h"
+//#include "NavigationSystem.h"
+//#include "NavigationPath.h"
+//#include "Navigation/PathFollowingComponent.h"
 
-#include "AIController.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "AITypes.h"
-#include "Perception/PawnSensingComponent.h"
+//#include "AIController.h"
+//#include "GameFramework/CharacterMovementComponent.h"
+//#include "AITypes.h"
+//#include "Perception/PawnSensingComponent.h"
 #include"IA_intractable.h"
-#include "NavigationPath.h"
+//#include "NavigationPath.h"
 
 // Sets default values
 AEvilWomen::AEvilWomen()
@@ -146,40 +146,7 @@ APatrolPath* AEvilWomen::GetPatrolPath() const
 	return PatrolPath;
 }
 
-FPatrolRoute AEvilWomen::GetClosestPatrolRoute(AActor*PlayerActor) const
-{
-	FPatrolRoute BestRoute;
-	float ClosestDistance = TNumericLimits<float>::Max();
 
-	if (!PlayerActor)
-	{
-		return BestRoute;
-	}
-
-	const FVector PlayerLocation = PlayerActor->GetActorLocation();
-
-	// Iterate over each patrol route
-	for (const FPatrolRoute& Route : PatrolArray)
-	{
-		// Ensure there is at least one patrol point
-		if (Route.PatrolPoints.Num() > 0)
-		{
-			// Use the first patrol point as the reference
-			FVector PatrolLocation = Route.PatrolPoints[0]->GetActorLocation();
-			float Distance = FVector::Dist(PlayerLocation, PatrolLocation);
-
-			// Alternatively, you could compute the average location of all patrol points here
-
-			if (Distance < ClosestDistance)
-			{
-				ClosestDistance = Distance;
-				BestRoute = Route;
-			}
-		}
-	}
-
-	return BestRoute;
-}
 
 void AEvilWomen::OpenDoor()
 {
@@ -188,25 +155,5 @@ void AEvilWomen::OpenDoor()
 	
 }
 
-void AEvilWomen::CustomPatrol()
-{
-	AAIController* LocalController = Cast<AAIController>(GetController());
-	if (LocalController)
-	{
-		FAIMoveRequest Request;
-		FNavPathSharedPtr Path;
-		Request.SetAcceptanceRadius(20.f);
-		Request.SetGoalActor(PatrolTarget);
-		LocalController->MoveTo(Request, &Path);
-
-		TArray<FNavPathPoint> Paths=Path->GetPathPoints();
-         for (auto& point : Paths)
-         {
-	      const FVector Location = point.Location;
-         	
-         }
-		
-	}
-}
 
 

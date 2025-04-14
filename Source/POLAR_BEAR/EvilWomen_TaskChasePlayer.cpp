@@ -19,8 +19,7 @@ EBTNodeResult::Type UEvilWomen_TaskChasePlayer::ExecuteTask(UBehaviorTreeCompone
     if (auto* const cont=Cast<AAICEvilWomen>(Comp.GetAIOwner()))
     {
     	auto const PlayerLocation=Comp.GetBlackboardComponent()->GetValueAsVector(GetSelectedBlackboardKey());
-
-
+        Comp.GetBlackboardComponent()->SetValueAsBool("bChased",true);
     	UAIBlueprintHelperLibrary::SimpleMoveToLocation(cont,PlayerLocation);
     	FinishLatentTask(Comp,EBTNodeResult::Succeeded);
     	return EBTNodeResult::Succeeded;

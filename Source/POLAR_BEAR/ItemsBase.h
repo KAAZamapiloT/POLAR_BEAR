@@ -29,7 +29,7 @@ class POLAR_BEAR_API AItemsBase : public AActor
 {
 	GENERATED_BODY()
 
-private:
+protected:
 	FName ItemName;
 	FName ItemDescreption;
 	UPROPERTY(BlueprintReadWrite,meta=(AllowPrivateAccess="true"))

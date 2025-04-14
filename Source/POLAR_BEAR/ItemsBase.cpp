@@ -3,7 +3,7 @@
 
 #include "ItemsBase.h"
 
-#include "NavigationSystemTypes.h"
+//#include "NavigationSystemTypes.h"
 #include "Components/BoxComponent.h"
 #include"Components/StaticMeshComponent.h"
 

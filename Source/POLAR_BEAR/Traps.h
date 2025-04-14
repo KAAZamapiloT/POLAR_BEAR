@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <rapidjson/internal/meta.h>
+
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -34,8 +34,5 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-    UFUNCTION(BlueprintCallable,Blueprintable,Category="Traps")
-	void Signal() override;
-	UFUNCTION(BlueprintCallable,BlueprintCallable,Category="Traps")
-	void RevCast() override;
+  
 };

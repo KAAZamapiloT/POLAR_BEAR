@@ -24,13 +24,5 @@ void ATraps::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ATraps::Signal()
-{
-	IIA_intractable::Signal();
-}
 
-void ATraps::RevCast()
-{
-	IIA_intractable::RevCast();
-}
 

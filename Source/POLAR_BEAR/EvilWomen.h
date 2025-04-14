@@ -84,17 +84,20 @@ public:
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI_Navigation")
 	AActor*PatrolTarget;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
-	TArray<AActor*> PatrolActors;
+	TArray<APatrolPath*> PatrolActors;
 
     //ADVANCED PATROLLING (OPTIONAL MAY NOT BE IN FINAL)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
-	TArray<AActor*> CurrentPatrolArray;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
-	TArray<FPatrolRoute> PatrolArray;
-
-	UFUNCTION(BlueprintCallable,Blueprintable,Category="AI")
-	FPatrolRoute GetClosestPatrolRoute(AActor*PlayerActor)const;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
+	//TArray<AActor*> CurrentPatrolArray;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	int32 CurrentPatrolIndex=0;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI")
+	//TArray<FPatrolRoute> PatrolArray;
+	//UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
+	//TArray<APatrolPath*> CurrentPatrolActors;
+	//UFUNCTION(BlueprintCallable,Blueprintable,Category="AI")
+	//FPatrolRoute GetClosestPatrolRoute(AActor*PlayerActor)const;
 	
 	// SOMETHINGS RELATED TO PUZZLE SYSTEM
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI")
@@ -107,8 +110,7 @@ public:
 	void OpenDoor();
 	UFUNCTION(BlueprintCallable)
 	void Attack();
-	UFUNCTION(BlueprintCallable,Category="AI_Navigation")
-	void CustomPatrol();
+	
 };
 
 

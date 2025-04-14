@@ -21,7 +21,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FindPlayer();
 
-private:
+
 	
 
 	

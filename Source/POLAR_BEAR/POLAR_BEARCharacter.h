@@ -8,7 +8,7 @@
 #include "Logging/LogMacros.h"
 #include "IA_Damageable.h"
 #include "KeysInventory.h"
-#include "Elements/Common/TypedElementCommonTypes.h"
+
 
 #include "POLAR_BEARCharacter.generated.h"
 
@@ -122,6 +122,7 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 // AI WORKS
+	// THIS IS WHERE AI RECIEVE ITS INPUT ABOUT WHEATHER PLAYER EXSISTYS OR NOT 
 	UAIPerceptionStimuliSourceComponent*StimulusSource;
 
     void SetupStimulusSource();

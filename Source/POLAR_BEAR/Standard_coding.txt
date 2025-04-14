@@ -28,3 +28,7 @@
  https://www.youtube.com/watch?v=3Ic1-XyoGiU&list=PLWUvrI0mg8VKTJWKqsDn_xyZfD3f7Xye-&index=13
  
  -> CHANGED FEW THINGS FROM THIS CODE 
+ 
+ 
+ //+ClassRedirects=(OldName="/Script/POLAR_BEAR.MyClass",NewName="/Script/POLAR_BEAR.EvilWomen_Task_ChangePatrolRoute")
+ pulled froom default engine.ini

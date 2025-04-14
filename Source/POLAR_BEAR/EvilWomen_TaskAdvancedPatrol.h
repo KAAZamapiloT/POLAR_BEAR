@@ -20,4 +20,15 @@ class POLAR_BEAR_API UEvilWomen_TaskAdvancedPatrol : public UBTTask_BlackboardBa
 private:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
 	FBlackboardKeySelector FArrayIndex;
+	UPROPERTY(EditAnywhere,Category="AI")
+	FVector Playerl;
+UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
+	float AcceptanceRadius;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
+	FBlackboardKeySelector FArrayKey;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="AI",meta=(AllowPrivateAccess=true))
+	FBlackboardKeySelector FVectorKey;
+
 };

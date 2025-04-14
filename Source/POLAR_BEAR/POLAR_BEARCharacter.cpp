@@ -399,18 +399,17 @@ void APOLAR_BEARCharacter::Look(const FInputActionValue& Value)
 
 void APOLAR_BEARCharacter::Sprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 1200.0f;
+	//GetCharacterMovement()->MaxWalkSpeed = 1200.0f;
 }
 
 void APOLAR_BEARCharacter::StopSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	//GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 }
 
 
 void APOLAR_BEARCharacter::weak_attack()
 {
-	TArray<FHitResult> HitResults;
-	FVector Start=GetActorLocation();
+	
 	
 }
