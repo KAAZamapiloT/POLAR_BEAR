@@ -8,6 +8,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include  "PatrolPath.h"
+#include "Perception/AISenseConfig_Hearing.h"
 
 // Sets default values
 AAICEvilWomen::AAICEvilWomen()
@@ -53,25 +54,37 @@ void AAICEvilWomen::Tick(float DeltaTime)
 
 void AAICEvilWomen::SetupPerceptionSystem()
 {
-SightConfig=CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
-
+      SightConfig=CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
+	HearingConfig = CreateDefaultSubobject<UAISenseConfig_Hearing>(TEXT("Hearing Config"));
+	SetPerceptionComponent(*CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component")));
+	if (HearingConfig)
+	{
+		HearingConfig->HearingRange=3000.0f;
+		
+		HearingConfig->DetectionByAffiliation.bDetectEnemies = true;
+		HearingConfig->DetectionByAffiliation.bDetectFriendlies = true;
+		HearingConfig->DetectionByAffiliation.bDetectNeutrals = true;
+		HearingConfig->SetMaxAge(20.f);
+		HearingConfig->SetStartsEnabled(true);
+		GetPerceptionComponent()->ConfigureSense(*HearingConfig);
+	}
 	if (SightConfig)
 	{
-		SetPerceptionComponent(*CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component")));
+		
+        
 
-
-		SightConfig->SightRadius = 500.0f;
+		SightConfig->SightRadius = 800.0f;
 		SightConfig->LoseSightRadius = SightConfig->SightRadius+25.f;
-		SightConfig->PeripheralVisionAngleDegrees = 60.0f;
+		SightConfig->PeripheralVisionAngleDegrees = 75.0f;
 		SightConfig->SetMaxAge(5.f);
 		SightConfig->AutoSuccessRangeFromLastSeenLocation=550.f;
 		SightConfig->DetectionByAffiliation.bDetectEnemies = true;
 		SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
 		SightConfig->DetectionByAffiliation.bDetectNeutrals = true;
-
+ 
+		
         GetPerceptionComponent()->SetDominantSense(*SightConfig->GetSenseImplementation());
 		GetPerceptionComponent()->OnTargetPerceptionUpdated.AddDynamic(this,&AAICEvilWomen::AAICEvilWomen::OnTargetDetected);
-
 		GetPerceptionComponent()->ConfigureSense(*SightConfig);
 		
 	}
@@ -80,11 +93,20 @@ SightConfig=CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
 
 void AAICEvilWomen::OnTargetDetected(AActor* InTarget, FAIStimulus Stimulus)
 {
-
 	if (auto*const ch=Cast<APOLAR_BEARCharacter>(InTarget))
 	{
-	BlackboardComponent->SetValueAsBool("IsSeeingPlayer",Stimulus.WasSuccessfullySensed());
+		BlackboardComponent->SetValueAsBool("IsSeeingPlayer",Stimulus.WasSuccessfullySensed());
 		
+	}
+	else if (Stimulus.Type == UAISense::GetSenseID<UAISense_Hearing>())
+	{
+		UE_LOG(LogTemp,Warning,TEXT("HEARING Loop was entered"));
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			BlackboardComponent->SetValueAsBool("IsHearingPlayer", true);
+			BlackboardComponent->SetValueAsVector("LastHeardLocation", Stimulus.StimulusLocation);
+			UE_LOG(LogTemp,Warning,TEXT("HEARING WAS SENSED"));
+		}
 	}
 }
 

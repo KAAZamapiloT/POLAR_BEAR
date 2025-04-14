@@ -22,7 +22,7 @@ class UBehaviorTreeComponent;
 
 //ENUMRATION FOR STATES IMPLEMETATION
 UENUM(BlueprintType)
-enum class EAICEvilWomen : uint8
+enum class EAICPatrolStates : uint8
 {
 	Idle        UMETA(DisplayName = "Idle"),
 	Patrolling  UMETA(DisplayName = "Patrolling"),
@@ -65,7 +65,8 @@ public:
 	TObjectPtr<UAIPerceptionComponent> AIPerceptionComponent;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI_Perception")
 	class UAISenseConfig_Sight* SightConfig;
-
+    UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="AI_Perception")
+	class UAISenseConfig_Hearing* HearingConfig;
 	UFUNCTION(BlueprintCallable,Category="AI_Perception")
 	void SetupPerceptionSystem();
 	UFUNCTION(BlueprintCallable,Blueprintable,Category="AI_Perception")

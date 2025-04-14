@@ -3,9 +3,6 @@
 
 #include "AC_DamageComponent.h"
 
-#include "IA_Damageable.h"
-#include"Kismet/GameplayStatics.h"
-#include "Kismet/KismetSystemLibrary.h"
 // Sets default values for this component's properties
 UAC_DamageComponent::UAC_DamageComponent()
 {

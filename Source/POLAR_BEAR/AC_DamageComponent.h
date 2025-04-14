@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+
 #include "AC_DamageComponent.generated.h"
 
 // IMPORTANT VARIABLES FOR DAMAGE SYSTEM

@@ -4,17 +4,14 @@
 #include "ADoor.h"
 #include"Components/BoxComponent.h"
 #include"Components/StaticMeshComponent.h"
-#include"Kismet/GameplayStatics.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Kismet/KismetMathLibrary.h"
-#include "GameFramework/Character.h"
+
 #include "DrawDebugHelpers.h"
 #include"Sound/SoundBase.h"
 #include"Components/AudioComponent.h"
 
 #include"POLAR_BEARCharacter.h"
 #include "AKey.h"
-#include "SQCapture.h"
+
 #include "Engine/OverlapResult.h"
 // Sets default values
 AADoor::AADoor()

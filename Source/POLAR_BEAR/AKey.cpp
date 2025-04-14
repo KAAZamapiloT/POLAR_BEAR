@@ -5,8 +5,6 @@
 #include"Components/BoxComponent.h"
 #include"Components/StaticMeshComponent.h"
 #include"POLAR_BEARCharacter.h"
-#include "FileCache.h"
-#include "IDetailTreeNode.h"
 #include "Engine/OverlapResult.h"
 
 
@@ -15,9 +13,6 @@ AAKey::AAKey()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>("ItemMesh");
-	//RootComponent = ItemMesh;       -> THESE THINGS ARE ALRREA DEFINED IN ITEM MESH 
-	//CollisionBox->SetupAttachment(ItemMesh);
 	
 }
 
