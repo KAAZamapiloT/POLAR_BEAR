@@ -14,6 +14,8 @@ class POLAR_BEAR_API UMainCAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 public:
+	// PARENT CLASS FOR ANIMATIONS
+	// THESE FUNCTIONS SET FEW IMPORTANT VARIABLES FOR CHARACER
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 	UPROPERTY(BlueprintReadWrite,Category="Movement")
