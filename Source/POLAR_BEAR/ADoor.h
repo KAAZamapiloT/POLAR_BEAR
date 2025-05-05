@@ -61,6 +61,8 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Sectors")
+	int Sector=0;
 	UFUNCTION(BlueprintCallable,Blueprintable,category="Motion")
 	bool Open();
 	UFUNCTION(BlueprintCallable,Blueprintable,category="Motion")
